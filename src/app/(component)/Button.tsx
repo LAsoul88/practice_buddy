@@ -1,18 +1,18 @@
-
-// Name
-// color scheme
-// disabled
-// onClick
+import type { ReactNode } from 'react'
 
 interface ButtonProps {
-  children: string
+  children: ReactNode
   type?: 'primary' | 'secondary'
   disabled?: boolean
   onClick: () => void
 }
 
-export const Button = ({ children, type = 'primary', disabled = false, onClick }: ButtonProps) => {
-
+export const Button = ({ 
+  children, 
+  type = 'primary', 
+  disabled = false, 
+  onClick 
+}: ButtonProps) => {
   return (
     <button 
       disabled={disabled}
