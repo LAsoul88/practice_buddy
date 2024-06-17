@@ -10,8 +10,8 @@ class Metronome {
   isRunning: boolean
   intervalID?: ReturnType<typeof setInterval>
 
-  constructor(audioContext: AudioContext, tempo = 120) {
-    this.audioContext = audioContext
+  constructor(tempo = 120) {
+    this.audioContext = new AudioContext()
     this.notesInQueue = [] // notes that have been put into the web audio and may or may not have been played yet {note, time}
     this.currentBeatInBar = 0
     this.beatsPerBar = 4
