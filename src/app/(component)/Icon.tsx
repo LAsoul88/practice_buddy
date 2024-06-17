@@ -1,19 +1,29 @@
-import { icons } from '@/assets/icons'
-import type { ReactNode } from 'react'
+import Image from 'next/image'
 
 interface IconProps {
-  name: string
+  path: string
   variant?: string
+  height?: number
+  width?: number
+  alt: string
 }
 
 export const Icon = ({
-  name,
+  path,
   variant = 'black',
+  height = 48,
+  width = 48,
+  alt
 }: IconProps) => {
-  const svg: ReactNode = icons[name]
   return (
     <>
-      { svg }
+      <Image
+        priority
+        src={path}
+        height={height}
+        width={width}
+        alt={alt}
+      />
     </>
   )
 }
