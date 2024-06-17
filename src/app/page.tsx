@@ -4,7 +4,6 @@ import { Button } from '@/app/(component)/Button'
 import Metronome from '@/util/metronome'
 
 export default function Home() {
-  const [audioContext, setAudioContext] = useState<AudioContext | null>(null)
   const [metronome, setMetronome] = useState<Metronome>()
 
   const startMetronome = () => {
@@ -12,19 +11,21 @@ export default function Home() {
     console.log(metronome)
   }
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const val = window.AudioContext = window.AudioContext || window.webkitAudioContext
-      setAudioContext(new val)
-      if (audioContext !== null) {
-        setMetronome(new Metronome(audioContext))
-      }
-    }
-  }, [])
+  const createMetronome = () => {
+    setMetronome(new Metronome)
+  }
+
   console.log(metronome)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>Welcome to Practice Buddy</h1>
+      <Button 
+        onClick={() => {
+          createMetronome()
+        }}
+      >
+        Create
+      </Button>
       <Button 
         onClick={() => {
           startMetronome()
