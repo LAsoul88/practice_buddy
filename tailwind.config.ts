@@ -7,13 +7,13 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      'celadon': '#94C595',
-      'platinum': '#DDDDE3',
-      'slate gray': '#767F93',
-      'oxford blue': '#0B183E'
-    },
     extend: {
+      colors: {
+        celadon: '#94C595',
+        platinum: '#DDDDE3',
+        'slate-gray': '#767F93',
+        'oxford-blue': '#0B183E'
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
