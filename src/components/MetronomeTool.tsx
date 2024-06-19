@@ -1,5 +1,5 @@
 'use client'
-import { useState, ChangeEvent } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { Button } from './Button'
 import { Metronome } from '@/util/metronome'
 import { Play, Pause } from '@/assets/SVGS'
@@ -23,23 +23,23 @@ export const MetronomeTool = () => {
 			newMetronome.startStop()
 			setMetronome(newMetronome)
 		} else {
-			metronome.tempo = settings.tempo
 			metronome.startStop()
 		}
 		setIsRunning(!isRunning)
 	}
 
-	const updateMetronome = () => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const value: string = e.target.value
+		const field: string = e.target.id
+		setSettings({ ...settings, [field]: value })
+	}
+
+	useEffect(() => {
 		if (metronome) {
 			metronome.tempo = settings.tempo
 			metronome.beatsPerBar = settings.beatsPerBar
 		}
-	}
-
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		let value = e.target.value
-		setSettings({ ...settings, [e.target.id]: value })
-	}
+	}, [settings.tempo, settings.beatsPerBar])
 
 	return (
 		<>
@@ -49,40 +49,39 @@ export const MetronomeTool = () => {
 				}}
 			>
 				{isRunning ? (
-					<Pause
-						height={'100px'}
-						width={'100px'}
-            fill={'#0B183E'}
-					/>
+					<Pause height={'200px'} width={'200px'} fill={'#0B183E'} />
 				) : (
-					<Play
-						height={'100px'}
-						width={'100px'}
-            fill={'#0B183E'}
-					/>
+					<Play height={'200px'} width={'200px'} fill={'#0B183E'} />
 				)}
 			</Button>
-			<input
-				type="number"
-				id="tempo"
-				name="tempo"
-				value={settings.tempo}
-				onChange={handleChange}
-			/>
-			<input
-				type="number"
-				id="beatsPerBar"
-				name="beatsPerBar"
-				value={settings.beatsPerBar}
-				onChange={handleChange}
-			/>
-			<Button
-				onClick={() => {
-					updateMetronome()
-				}}
-			>
-				Submit
-			</Button>
+			<div className="flex p-2 space-between w-full">
+				<div className="flex flex-col text-center items-center w-1/2 p-2">
+					<label htmlFor="tempo">Tempo</label>
+					<input
+						type="number"
+						min={24}
+						max={300}
+						id="tempo"
+						name="tempo"
+						value={settings.tempo}
+						onChange={handleChange}
+						className="input w-[72px]"
+					/>
+				</div>
+				<div className="flex flex-col text-center items-center w-1/2 p-2">
+					<label htmlFor="beatsPerBar">Beats Per Bar</label>
+					<input
+						type="number"
+						min={2}
+						max={32}
+						id="beatsPerBar"
+						name="beatsPerBar"
+						value={settings.beatsPerBar}
+						onChange={handleChange}
+						className="input w-[72px] "
+					/>
+				</div>
+			</div>
 		</>
 	)
 }
