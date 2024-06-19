@@ -1,8 +1,8 @@
 'use client'
 import { useState, ChangeEvent } from 'react'
 import { Button } from './Button'
-import { Icon } from './Icon'
 import { Metronome } from '@/util/metronome'
+import { Play, Pause } from '@/assets/SVGS'
 
 interface MetronomeSettings {
 	tempo: number
@@ -49,18 +49,16 @@ export const MetronomeTool = () => {
 				}}
 			>
 				{isRunning ? (
-					<Icon
-						path={'/images/pause.svg'}
-						alt={'pause button'}
-						height={100}
-						width={100}
+					<Pause
+						height={'100px'}
+						width={'100px'}
+            fill={'#0B183E'}
 					/>
 				) : (
-					<Icon
-						path={'/images/play.svg'}
-						alt={'play button'}
-						height={100}
-						width={100}
+					<Play
+						height={'100px'}
+						width={'100px'}
+            fill={'#0B183E'}
 					/>
 				)}
 			</Button>
