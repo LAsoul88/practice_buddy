@@ -1,4 +1,4 @@
-class Metronome {
+export class Metronome {
 	audioContext: AudioContext
 	notesInQueue: any[]
 	currentBeatInBar: number
@@ -10,7 +10,7 @@ class Metronome {
 	isRunning: boolean
 	intervalID?: ReturnType<typeof setInterval>
 
-	constructor(tempo: number, beatsPerBar: number) {
+	constructor(tempo = 120, beatsPerBar = 4) {
 		this.audioContext = new AudioContext()
 		this.notesInQueue = [] // notes that have been put into the web audio and may or may not have been played yet {note, time}
 		this.currentBeatInBar = 0
@@ -92,4 +92,3 @@ class Metronome {
 	}
 }
 
-export default Metronome
