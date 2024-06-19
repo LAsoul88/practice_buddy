@@ -11,8 +11,8 @@ const config: Config = {
       colors: {
         celadon: '#94C595',
         platinum: '#DDDDE3',
-        'slate-gray': '#767F93',
-        'oxford-blue': '#0B183E'
+        slateGray: '#767F93',
+        oxfordBlue: '#0B183E'
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
