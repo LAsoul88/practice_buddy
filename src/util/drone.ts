@@ -1,7 +1,7 @@
 interface FrequencyMap {
   [key: string]: number
 }
-const freqMap: FrequencyMap = {
+export const freqMap: FrequencyMap = {
   'C': 261.63,
   'C#/Db': 277.18,
   'D': 293.66,
