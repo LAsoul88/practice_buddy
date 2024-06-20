@@ -30,7 +30,7 @@ export class Metronome {
 		this.nextNoteTime += secondsPerBeat // Add beat length to last beat time
 
 		this.currentBeatInBar++ // Advance the beat number, wrap to zero
-		if (this.currentBeatInBar == this.beatsPerBar) {
+		if (this.currentBeatInBar === this.beatsPerBar) {
 			this.currentBeatInBar = 0
 		}
 	}
@@ -69,7 +69,7 @@ export class Metronome {
 	start() {
 		if (this.isRunning) return
 
-		if (this.audioContext == null) {
+		if (this.audioContext === null) {
 			this.audioContext = new AudioContext()
 		}
 
