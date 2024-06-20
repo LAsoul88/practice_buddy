@@ -1,5 +1,5 @@
 'use client'
-import { useState, ChangeEvent } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { Button } from './Button'
 import { Drone, freqMap } from '@/util/drone'
 
@@ -29,6 +29,13 @@ export const DroneTool = () => {
     const value: string = e.target.value
     setSettings({ ...settings, frequency: value })
   }
+
+  useEffect(() => {
+    if (drone) {
+      drone.frequency = freqMap[settings.frequency]
+    }
+  }, [settings.frequency])
+
   console.log(settings)
   return (
     <>

@@ -20,14 +20,14 @@ export class Drone {
   audioContext: AudioContext
   oscillator: OscillatorNode
   envelope: GainNode
-  pitch: number
+  frequency: number
   isRunning: boolean
 
   constructor(note = 'A') {
     this.audioContext = new AudioContext()
     this.oscillator = this.audioContext.createOscillator()
     this.envelope = this.audioContext.createGain()
-    this.pitch = freqMap[note]
+    this.frequency = freqMap[note]
     this.isRunning = false
   }
 
@@ -44,7 +44,7 @@ export class Drone {
     // this.envelope.gain.exponentialRampToValueAtTime(1, 1)
     
     this.oscillator.type = 'triangle'
-    this.oscillator.frequency.value = this.pitch
+    this.oscillator.frequency.value = this.frequency
     this.oscillator.start(this.audioContext.currentTime)
 
     this.oscillator.connect(this.envelope)
@@ -53,7 +53,8 @@ export class Drone {
   start() {
     console.log(this.oscillator.context)
     if (this.oscillator.context.state === 'suspended') this.activateOsc()
-      
+    
+    this.oscillator.frequency.value = this.frequency
     this.oscillator.connect(this.audioContext.destination)
     this.envelope.connect(this.audioContext.destination)
     this.isRunning = true
