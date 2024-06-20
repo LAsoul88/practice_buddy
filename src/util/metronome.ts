@@ -1,6 +1,9 @@
 export class Metronome {
 	audioContext: AudioContext
-	notesInQueue: { note: number; time: number }[]
+	notesInQueue: { 
+		note: number
+		time: number 
+	}[]
 	currentBeatInBar: number
 	beatsPerBar: number
 	tempo: number
