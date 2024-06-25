@@ -2,6 +2,7 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 import { Button } from './Button'
 import { Drone, freqMap } from '@/util/drone'
+import { Play, Pause } from '@/assets/SVGS'
 
 interface DroneSettings {
   frequency: string
@@ -14,6 +15,7 @@ export const DroneTool = () => {
   const [settings, setSettings] = useState<DroneSettings>({
     frequency: 'A'
   })
+  const [isRunning, setIsRunning] = useState(false)
 
   const handleDrone = () => {
     if (!drone) {
@@ -23,6 +25,7 @@ export const DroneTool = () => {
     } else {
       drone.startStop()
     }
+    setIsRunning(!isRunning)
   }
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -37,7 +40,6 @@ export const DroneTool = () => {
     }
   }, [settings.frequency])
 
-  console.log(settings)
   return (
     <>
       <Button
@@ -45,11 +47,16 @@ export const DroneTool = () => {
           handleDrone()
         }} 
       >
-        Start
+        { isRunning ? (
+          <Pause height={'200px'} width={'200px'} fill={'#0B183E'} />
+        ) : (
+          <Play height={'200px'} width={'200px'} fill={'#0B183E'} />
+        )}
       </Button>
       <select
         onChange={handleChange}
         defaultValue={settings.frequency}
+        className="input"
       >
         { notes.map(note => {
             return <option key={note}>{note}</option>
