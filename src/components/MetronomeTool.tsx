@@ -48,7 +48,7 @@ export const MetronomeTool = () => {
 					handleMetronome()
 				}}
 			>
-				{isRunning ? (
+				{ isRunning ? (
 					<Pause height={'200px'} width={'200px'} fill={'#0B183E'} />
 				) : (
 					<Play height={'200px'} width={'200px'} fill={'#0B183E'} />

@@ -40,8 +40,7 @@ export class Drone {
       this.envelope = this.audioContext.createGain()
     }
     
-    this.envelope.gain.value = 1
-    // this.envelope.gain.exponentialRampToValueAtTime(1, 1)
+    this.envelope.gain.value = 0.5
     
     this.oscillator.type = 'triangle'
     this.oscillator.frequency.value = this.frequency

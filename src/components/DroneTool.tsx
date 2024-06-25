@@ -33,6 +33,7 @@ export const DroneTool = () => {
   useEffect(() => {
     if (drone) {
       drone.frequency = freqMap[settings.frequency]
+      drone.oscillator.frequency.value = freqMap[settings.frequency]
     }
   }, [settings.frequency])
 
