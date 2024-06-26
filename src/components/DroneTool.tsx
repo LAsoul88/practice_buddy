@@ -13,7 +13,7 @@ const notes = Object.keys(freqMap)
 
 // gain value on GainNode requires value to be >= -1 and <= 1
 // this function allows volume to be presented to user as value between 0 - 20
-const convertVolume = (gain: number) => gain / 10 - 1
+const convertVolume = (gain: number) => gain / 10
 
 export const DroneTool = () => {
   const [drone, setDrone] = useState<Drone>()
@@ -25,7 +25,7 @@ export const DroneTool = () => {
 
   const handleDrone = () => {
     if (!drone) {
-      const newDrone = new Drone(settings.frequency)
+      const newDrone = new Drone(freqMap[settings.frequency], convertVolume(settings.volume))
       newDrone.startStop()
       setDrone(newDrone)
     } else {
@@ -42,10 +42,13 @@ export const DroneTool = () => {
 
   useEffect(() => {
     if (drone) {
-      drone.frequency = freqMap[settings.frequency]
-      drone.oscillator.frequency.value = freqMap[settings.frequency]
-      drone.envelope.gain.value = convertVolume(settings.volume)
-      console.log(drone.envelope)
+      console.log(convertVolume(settings.volume))
+      const freq = freqMap[settings.frequency]
+      const vol = convertVolume(settings.volume)
+      drone.frequency = freq
+      drone.oscillator.frequency.value = freq
+      drone.gain = vol
+      drone.envelope.gain.value = vol
     }
   }, [settings.frequency, settings.volume])
 
@@ -77,7 +80,7 @@ export const DroneTool = () => {
         type="number"
         id="volume"
         min={0}
-        max={20}
+        max={10}
         value={settings.volume}
         onChange={handleChange}
         className="input"
