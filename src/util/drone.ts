@@ -25,8 +25,10 @@ export class Drone {
 
   constructor(note = 'A') {
     this.audioContext = new AudioContext()
-    this.oscillator = this.audioContext.createOscillator()
-    this.envelope = this.audioContext.createGain()
+    this.oscillator = new OscillatorNode(this.audioContext)
+    // this.oscillator = this.audioContext.createOscillator()
+    // this.envelope = this.audioContext.createGain()
+    this.envelope = new GainNode(this.audioContext)
     this.frequency = freqMap[note]
     this.isRunning = false
   }
@@ -36,31 +38,30 @@ export class Drone {
 
     if (!this.audioContext) {
       this.audioContext = new AudioContext()
-      this.oscillator = this.audioContext.createOscillator()
-      this.envelope = this.audioContext.createGain()
+      this.oscillator = new OscillatorNode(this.audioContext)
+      this.envelope = new GainNode(this.audioContext)
     }
-    
-    this.envelope.gain.value = 0.5
-    
-    this.oscillator.type = 'triangle'
+    this.oscillator.type = 'sine'
     this.oscillator.frequency.value = this.frequency
-    this.oscillator.start(this.audioContext.currentTime)
-
     this.oscillator.connect(this.envelope)
+    this.envelope.connect(this.audioContext.destination)
+    this.oscillator.start()
+    
+    this.envelope.gain.value = -0.7 
+
   }
   
   start() {
-    console.log(this.oscillator.context)
     if (this.oscillator.context.state === 'suspended') this.activateOsc()
     
     this.oscillator.frequency.value = this.frequency
-    this.oscillator.connect(this.audioContext.destination)
     this.envelope.connect(this.audioContext.destination)
+    this.oscillator.connect(this.audioContext.destination)
     this.isRunning = true
   }
   stop() {
-    this.oscillator.disconnect(this.audioContext.destination)
-    this.envelope.disconnect(this.audioContext.destination)
+    this.oscillator.disconnect()
+    // this.envelope.disconnect()
     this.isRunning = false
   }
   startStop() {
