@@ -6,6 +6,7 @@ import { Play, Pause } from '@/assets/SVGS'
 
 interface DroneSettings {
   frequency: string
+  volume: number
 }
 
 const notes = Object.keys(freqMap)
@@ -13,7 +14,8 @@ const notes = Object.keys(freqMap)
 export const DroneTool = () => {
   const [drone, setDrone] = useState<Drone>()
   const [settings, setSettings] = useState<DroneSettings>({
-    frequency: 'A'
+    frequency: 'A',
+    volume: -0.7
   })
   const [isRunning, setIsRunning] = useState(false)
 
@@ -28,17 +30,20 @@ export const DroneTool = () => {
     setIsRunning(!isRunning)
   }
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const value: string = e.target.value
-    setSettings({ ...settings, frequency: value })
+    const field: string = e.target.id
+    setSettings({ ...settings, [field]: value })
   }
 
   useEffect(() => {
     if (drone) {
       drone.frequency = freqMap[settings.frequency]
       drone.oscillator.frequency.value = freqMap[settings.frequency]
+      drone.envelope.gain.value = settings.volume
+      console.log(drone.envelope)
     }
-  }, [settings.frequency])
+  }, [settings.frequency, settings.volume])
 
   return (
     <>
@@ -56,6 +61,7 @@ export const DroneTool = () => {
       <select
         onChange={handleChange}
         defaultValue={settings.frequency}
+        id="frequency"
         className="input"
       >
         { notes.map(note => {
@@ -63,6 +69,17 @@ export const DroneTool = () => {
           }
         )}
       </select>
+      <input 
+        type="number"
+        id="volume"
+        min={-1}
+        max={1}
+        step="0.1"
+        value={settings.volume}
+        onChange={handleChange}
+        className="input"
+      />
+
     </>
   )
 }
