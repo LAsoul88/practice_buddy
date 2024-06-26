@@ -11,11 +11,15 @@ interface DroneSettings {
 
 const notes = Object.keys(freqMap)
 
+// gain value on GainNode requires value to be >= -1 and <= 1
+// this function allows volume to be presented to user as value between 0 - 20
+const convertVolume = (gain: number) => gain / 10 - 1
+
 export const DroneTool = () => {
   const [drone, setDrone] = useState<Drone>()
   const [settings, setSettings] = useState<DroneSettings>({
     frequency: 'A',
-    volume: -0.7
+    volume: 3
   })
   const [isRunning, setIsRunning] = useState(false)
 
@@ -31,7 +35,7 @@ export const DroneTool = () => {
   }
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-    const value: string = e.target.value
+    const value: string | number = e.target.value
     const field: string = e.target.id
     setSettings({ ...settings, [field]: value })
   }
@@ -40,7 +44,7 @@ export const DroneTool = () => {
     if (drone) {
       drone.frequency = freqMap[settings.frequency]
       drone.oscillator.frequency.value = freqMap[settings.frequency]
-      drone.envelope.gain.value = settings.volume
+      drone.envelope.gain.value = convertVolume(settings.volume)
       console.log(drone.envelope)
     }
   }, [settings.frequency, settings.volume])
@@ -72,14 +76,12 @@ export const DroneTool = () => {
       <input 
         type="number"
         id="volume"
-        min={-1}
-        max={1}
-        step="0.1"
+        min={0}
+        max={20}
         value={settings.volume}
         onChange={handleChange}
         className="input"
       />
-
     </>
   )
 }
