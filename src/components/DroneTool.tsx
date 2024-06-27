@@ -11,8 +11,6 @@ interface DroneSettings {
 
 const notes = Object.keys(freqMap)
 
-// gain value on GainNode requires value to be >= -1 and <= 1
-// this function allows volume to be presented to user as value between 0 - 20
 const convertVolume = (gain: number) => gain / 10
 
 export const DroneTool = () => {
@@ -65,26 +63,36 @@ export const DroneTool = () => {
           <Play height={'200px'} width={'200px'} fill={'#0B183E'} />
         )}
       </Button>
-      <select
-        onChange={handleChange}
-        defaultValue={settings.frequency}
-        id="frequency"
-        className="input"
-      >
-        { notes.map(note => {
-            return <option key={note}>{note}</option>
-          }
-        )}
-      </select>
-      <input 
-        type="number"
-        id="volume"
-        min={0}
-        max={10}
-        value={settings.volume}
-        onChange={handleChange}
-        className="input"
-      />
+      <div className="flex p-2 space-between w-full">
+        <div className="flex flex-col text-center items-center w-1/2 p-2">
+          <label htmlFor="frequency">Pitch</label>
+          <select
+            onChange={handleChange}
+            defaultValue={settings.frequency}
+            id="frequency"
+            name="frequency"
+            className="input w-[72px]"
+          >
+            { notes.map(note => {
+                return <option key={note}>{note}</option>
+              }
+            )}
+          </select>
+        </div>
+        <div className="flex flex-col text-center items-center w-1/2 p-2">
+          <label htmlFor="volume">Volume</label>
+          <input 
+            type="number"
+            id="volume"
+            name="volume"
+            min={0}
+            max={10}
+            value={settings.volume}
+            onChange={handleChange}
+            className="input w-[72px]"
+          />
+        </div>
+      </div>
     </>
   )
 }
