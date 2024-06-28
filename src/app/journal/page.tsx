@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Journal = () => {
+export default function Journal() {
   return (
     <div>
       Journal
