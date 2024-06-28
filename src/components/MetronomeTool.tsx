@@ -65,7 +65,7 @@ export const MetronomeTool = () => {
 						name="tempo"
 						value={settings.tempo}
 						onChange={handleChange}
-						className="input w-[72px]"
+						className="input w-[72px] h-[34px]"
 					/>
 				</div>
 				<div className="flex flex-col text-center items-center w-1/2 p-2">
@@ -78,7 +78,7 @@ export const MetronomeTool = () => {
 						name="beatsPerBar"
 						value={settings.beatsPerBar}
 						onChange={handleChange}
-						className="input w-[72px] "
+						className="input w-[72px] h-[34px]"
 					/>
 				</div>
 			</div>

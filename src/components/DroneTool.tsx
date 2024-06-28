@@ -71,7 +71,7 @@ export const DroneTool = () => {
             defaultValue={settings.frequency}
             id="frequency"
             name="frequency"
-            className="input w-[72px]"
+            className="input w-[72px] h-[34px]"
           >
             { notes.map(note => {
                 return <option key={note}>{note}</option>
@@ -89,7 +89,7 @@ export const DroneTool = () => {
             max={10}
             value={settings.volume}
             onChange={handleChange}
-            className="input w-[72px]"
+            className="input w-[72px] h-[34px]"
           />
         </div>
       </div>
