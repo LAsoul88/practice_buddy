@@ -18,7 +18,7 @@ describe('Journal Page', () => {
 
     const textbox = screen.getByRole('textbox')
 
-    expect(textbox).toBe('')
+    expect(textbox).toHaveValue('')
   })
 
   it('should update textbox with user input', async () => {
