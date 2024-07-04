@@ -1,15 +1,16 @@
 import { ChangeEvent } from 'react'
 
 interface InputProps {
-  inputType: string
+  inputType?: string
   type: string
   name: string
   min?: number
   max?: number
-  value: number
-  onChange: (e: ChangeEvent) => void
+  value: number | string
   width: string
   height: string
+  options?: string[]
+  handleChange: (e: ChangeEvent) => void
 }
 
 export const Input = ({ 
@@ -21,44 +22,57 @@ export const Input = ({
   value,
   width,
   height,
-  onChange
+  options = [],
+  handleChange
 }: InputProps) => {
+  const style = `input w-[${width}] h-[${height}]`
   const createInput = () => {
     switch (inputType) {
-      case 'input':
-        return (
-          <input 
-            type={type}
-            min={min}
-            max={max}
-            value={value}
-            onChange={onChange}
-            className={`input w-[${width}] h-[${height}]`}
-          />
-        )
       case 'select':
         return (
           <select
-          
+            id={name}
+            name={name}
+            defaultValue={value}
+            onChange={handleChange}
+            className={style}
           >
-  
+            { options.map(option => {
+              return <option key={option}>{option}</option>
+            })}
           </select>
         )
       case 'textarea':
         return (
           <textarea
-          
+            id={name}
+            name={name}
+            value={value}
+            onChange={handleChange}
+            className={style}
           >
   
           </textarea>
         )
-
+      default:
+        return (
+          <input 
+            type={type}
+            name={name}
+            id={name}
+            min={min}
+            max={max}
+            value={value}
+            onChange={handleChange}
+            className={style}
+          />
+        )
     }
   }
   return (
-    <div>
+    <>
       <label htmlFor={name}>{name}</label>
       { createInput() }
-    </div>
+    </>
   )
 }
