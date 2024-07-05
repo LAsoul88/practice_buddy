@@ -1,27 +1,27 @@
 import { ChangeEvent } from 'react'
 
-interface InputProps {
-  inputType?: string
-  type: string
+type InputProps = {
+  inputType?: 'input' | 'select'
+  type?: string
   name: string
   min?: number
   max?: number
   value: number | string
-  width: string
-  height: string
+  width?: string
+  height?: string
   options?: string[]
-  handleChange: (e: ChangeEvent) => void
+  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
 }
 
 export const Input = ({ 
-  inputType,
-  type,
+  inputType = 'input',
+  type = 'number',
   name,
   min,
   max,
   value,
-  width,
-  height,
+  width = '72px',
+  height = '34px',
   options = [],
   handleChange
 }: InputProps) => {
@@ -42,18 +42,16 @@ export const Input = ({
             })}
           </select>
         )
-      case 'textarea':
-        return (
-          <textarea
-            id={name}
-            name={name}
-            value={value}
-            onChange={handleChange}
-            className={style}
-          >
-  
-          </textarea>
-        )
+      // case 'textarea':
+      //   return (
+      //     <textarea
+      //       id={name}
+      //       name={name}
+      //       value={value}
+      //       onChange={handleChange}
+      //       className={style}
+      //     ></textarea>
+        // )
       default:
         return (
           <input 
