@@ -1,5 +1,5 @@
-import { DroneTool } from '@/components/DroneTool'
-import { MetronomeTool } from '@/components/MetronomeTool'
+import { DroneTool } from '@/app/_components/DroneTool'
+import { MetronomeTool } from '@/app/_components/MetronomeTool'
 
 export default function Home() {
   return (

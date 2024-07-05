@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, ChangeEvent } from 'react'
-import { Button } from './Button'
-import { Input } from './Input'
+import { Button } from '@/components/Button'
+import { Input } from '@/components/Input'
 import { Drone, freqMap } from '@/util/drone'
 import { Play, Pause } from '@/assets/SVGS'
 
