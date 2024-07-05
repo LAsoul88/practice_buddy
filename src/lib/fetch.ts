@@ -1,3 +1,5 @@
+import 'server-only'
+
 const baseURL = 'localhost:3001'
 
 export const GET = async (url: string) => {
