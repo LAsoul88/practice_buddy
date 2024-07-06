@@ -2,6 +2,7 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import type { FormElements } from '@/components/Input'
 import { Drone, freqMap } from '@/util/drone'
 import { Play, Pause } from '@/assets/SVGS'
 
@@ -37,7 +38,7 @@ export const DroneTool = () => {
 	}
 
 	const handleChange = (
-		e: ChangeEvent<HTMLSelectElement | HTMLInputElement>
+		e: ChangeEvent<FormElements>
 	) => {
 		const value: string | number = e.target.value
 		const field: string = e.target.id
