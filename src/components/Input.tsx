@@ -1,7 +1,9 @@
 import { ChangeEvent } from 'react'
 
+export type FormElements = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+
 type InputProps = {
-  inputType?: 'input' | 'select'
+  inputType?: 'input' | 'select' | 'textarea'
   type?: string
   name: string
   min?: number
@@ -10,7 +12,7 @@ type InputProps = {
   width?: string
   height?: string
   options?: string[]
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
+  handleChange: (e: ChangeEvent<FormElements>) => void
 }
 
 export const Input = ({ 
@@ -42,16 +44,16 @@ export const Input = ({
             })}
           </select>
         )
-      // case 'textarea':
-      //   return (
-      //     <textarea
-      //       id={name}
-      //       name={name}
-      //       value={value}
-      //       onChange={handleChange}
-      //       className={style}
-      //     ></textarea>
-        // )
+      case 'textarea':
+        return (
+          <textarea
+            id={name}
+            name={name}
+            value={value}
+            onChange={handleChange}
+            className={style}
+            ></textarea>
+        )
       default:
         return (
           <input 
