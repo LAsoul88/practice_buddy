@@ -1,8 +1,9 @@
-import { DroneTool } from '@/components/DroneTool'
-import { MetronomeTool } from '@/components/MetronomeTool'
+import { DroneTool } from '@/app/_components/DroneTool'
+import { MetronomeTool } from '@/app/_components/MetronomeTool'
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-around bg-celadon text-oxford-blue">
+    <main className="flex min-h-screen flex-col items-center justify-around">
       <h1 className="">Welcome to Practice Buddy</h1>
       <div className="flex items-center text-center w-full">
         <section className="flex flex-col items-center w-1/3 min-h-[260px]" role="region" aria-label="Drone">

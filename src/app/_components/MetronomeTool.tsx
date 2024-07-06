@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, ChangeEvent } from 'react'
-import { Button } from './Button'
+import { Button } from '@/components/Button'
 import { Metronome } from '@/util/metronome'
 import { Play, Pause } from '@/assets/SVGS'
 
