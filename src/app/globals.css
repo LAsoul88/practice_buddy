@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base { 
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}
+
+@layer components {
+  .input {
+    @apply border border-oxfordBlue rounded-md text-oxfordBlue bg-platinum px-2 py-1
+  }
+}
