@@ -1,24 +1,18 @@
 'use client'
 import { useState, useEffect } from 'react'
-import type { FormEvent, ChangeEvent } from 'react'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import type { FormElements } from '@/components/Input'
-
-interface FormProps {
-  submit: (body: any) => void
-}
 
 export const JournalForm = ({ submit }: FormProps) => {
 	const [entry, setEntry] = useState('')
 
-	const handleSubmit = (e: FormEvent) => {
+	const handleSubmit = (e: OnSubmitEvent) => {
 		e.preventDefault()
 		submit(entry)
 		setEntry('')
 	}
 
-	const handleChange = (e: ChangeEvent<FormElements>) => {
+	const handleChange = (e: OnChangeEvent) => {
 		const value: string = e.target.value
 		setEntry(value)
 	}

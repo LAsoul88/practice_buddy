@@ -1,7 +1,5 @@
 import { ChangeEvent } from 'react'
 
-export type FormElements = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-
 type InputProps = {
   inputType?: 'input' | 'select' | 'textarea'
   type?: string
