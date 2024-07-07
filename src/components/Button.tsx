@@ -2,15 +2,15 @@ import type { ReactNode } from 'react'
 
 interface ButtonProps {
   children: ReactNode
-  type?: 'primary' | 'secondary'
+  type?: 'submit' | 'reset' | 'button'
   border?: boolean
   disabled?: boolean
-  onClick: () => void
+  onClick?: () => void
 }
 
 export const Button = ({ 
   children, 
-  type = 'primary', 
+  type = 'submit', 
   border,
   disabled = false, 
   onClick 
@@ -20,6 +20,7 @@ export const Button = ({
       disabled={disabled}
       className={`${border ? 'border border-2 border-oxfordBlue rounded-md' : ''} px-2 py-1`}
       onClick={onClick}
+      type={type}
     >
       {children}
     </button>

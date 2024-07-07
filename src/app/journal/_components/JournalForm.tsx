@@ -1,24 +1,18 @@
 'use client'
-import { useState, useEffect } from 'react'
-import type { FormEvent, ChangeEvent } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import type { FormElements } from '@/components/Input'
-
-interface FormProps {
-  submit: (body: any) => void
-}
 
 export const JournalForm = ({ submit }: FormProps) => {
 	const [entry, setEntry] = useState('')
 
-	const handleSubmit = (e: FormEvent) => {
+	const handleSubmit = (e: OnSubmitEvent) => {
 		e.preventDefault()
 		submit(entry)
 		setEntry('')
 	}
 
-	const handleChange = (e: ChangeEvent<FormElements>) => {
+	const handleChange = (e: OnChangeEvent) => {
 		const value: string = e.target.value
 		setEntry(value)
 	}
@@ -26,13 +20,13 @@ export const JournalForm = ({ submit }: FormProps) => {
 		<form className="flex flex-col" onSubmit={handleSubmit}>
 			<Input
 				inputType="textarea"
-				name="entry"
+				name="Entry"
 				value={entry}
 				handleChange={handleChange}
 				width={'200px'}
 				height={'200px'}
 			/>
-			<Button onClick={() => {}}>Submit</Button>
+			<Button>Submit</Button>
 		</form>
 	)
 }
