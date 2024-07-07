@@ -26,7 +26,7 @@ export const JournalForm = ({ submit }: FormProps) => {
 				width={'200px'}
 				height={'200px'}
 			/>
-			<Button onClick={() => {}}>Submit</Button>
+			<Button>Submit</Button>
 		</form>
 	)
 }
