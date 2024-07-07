@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 
 interface LoginInfo {
@@ -42,6 +43,7 @@ export const LoginForm = ({ children, submit }: FormProps) => {
           handleChange={handleChange}
         />
       </div>
+      <Button>Submit</Button>
     </form>
   )
 }
