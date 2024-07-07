@@ -2,7 +2,6 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import type { FormElements } from '@/components/Input'
 import { Drone, freqMap } from '@/util/drone'
 import { Play, Pause } from '@/assets/SVGS'
 
@@ -41,7 +40,7 @@ export const DroneTool = () => {
 		e: ChangeEvent<FormElements>
 	) => {
 		const value: string | number = e.target.value
-		const field: string = e.target.id
+		const field: string = e.target.id.toLowerCase()
 		setSettings({ ...settings, [field]: value })
 	}
 
@@ -73,7 +72,7 @@ export const DroneTool = () => {
 				<div className="flex flex-col text-center items-center w-1/2 p-2">
 					<Input
 						inputType="select"
-						name="frequency"
+						name="Frequency"
 						value={settings.frequency}
 						handleChange={handleChange}
 						options={notes}
@@ -81,7 +80,7 @@ export const DroneTool = () => {
 				</div>
 				<div className="flex flex-col text-center items-center w-1/2 p-2">
 					<Input
-						name="volume"
+						name="Volume"
 						min={0}
 						max={10}
 						value={settings.volume}

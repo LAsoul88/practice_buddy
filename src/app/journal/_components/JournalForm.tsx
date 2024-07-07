@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 
@@ -20,7 +20,7 @@ export const JournalForm = ({ submit }: FormProps) => {
 		<form className="flex flex-col" onSubmit={handleSubmit}>
 			<Input
 				inputType="textarea"
-				name="entry"
+				name="Entry"
 				value={entry}
 				handleChange={handleChange}
 				width={'200px'}
