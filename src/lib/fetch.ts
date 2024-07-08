@@ -1,6 +1,6 @@
 import 'server-only'
 
-const baseURL = 'localhost:3001'
+const baseURL = 'http://localhost:3001'
 
 export const GET = async (url: string) => {
   const result = await fetch(baseURL + url, {
@@ -12,7 +12,10 @@ export const GET = async (url: string) => {
 export const POST = async (url: string, body: any) => {
   const result = await fetch(baseURL + url, {
     method: 'POST',
-    body
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
   }).then(res => res.json())
   return result
 }
