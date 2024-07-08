@@ -8,7 +8,7 @@ interface LoginInfo {
   password: string
 }
 
-export const LoginForm = ({ children, submit }: FormProps) => {
+export const LoginForm = ({ submit }: FormProps) => {
   const [loginInfo, setLoginInfo] = useState<LoginInfo>({
     email: '',
     password: ''
@@ -16,7 +16,7 @@ export const LoginForm = ({ children, submit }: FormProps) => {
 
   const handleSubmit = (e: OnSubmitEvent) => {
     e.preventDefault()
-    submit('')
+    submit(loginInfo)
     setLoginInfo({ email: '', password: '' })
   }
 
@@ -26,24 +26,28 @@ export const LoginForm = ({ children, submit }: FormProps) => {
     setLoginInfo({ ...loginInfo, [field]: value })
   }
   return (
-    <form className="flex p-2 space-between w-full border rounded-md" onSubmit={handleSubmit}>
-      <div className="flex flex-col text-center items-center w-1/2 p-2">
-        <Input 
-          type="text"
-          name={'Email'}
-          value={loginInfo.email}
-          handleChange={handleChange}
-        />
+    <form className="flex w-full h-full border rounded-md justify-center items-center bg-slateGray" onSubmit={handleSubmit}>
+      <div>
+        <div className="flex flex-col text-center items-center p-2">
+          <Input 
+            type="email"
+            name={'Email'}
+            value={loginInfo.email}
+            handleChange={handleChange}
+          />
+        </div>
+        <div className="flex flex-col text-center items-center p-2">
+          <Input 
+            type="password"
+            name={'Password'}
+            value={loginInfo.password}
+            handleChange={handleChange}
+          />
+        </div>
+        <div className="flex flex-col text-center items-center p-2">
+          <Button>Submit</Button>
+        </div>
       </div>
-      <div className="flex flex-col text-center items-center w-1/2 p-2">
-        <Input 
-          type="text"
-          name={'Password'}
-          value={loginInfo.password}
-          handleChange={handleChange}
-        />
-      </div>
-      <Button>Submit</Button>
     </form>
   )
 }
