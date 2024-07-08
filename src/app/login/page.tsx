@@ -9,11 +9,12 @@ export default function Login() {
   }
 
 	return (
-		<div>
-			<LoginForm
-        submit={login}
-      >
-      </LoginForm>
+		<div className="w-full h-full flex justify-center p-40">
+      <div className="flex w-full h-full">
+        <LoginForm
+          submit={login}
+        />
+      </div>
 		</div>
 	)
 }

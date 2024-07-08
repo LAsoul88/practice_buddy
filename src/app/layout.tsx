@@ -14,9 +14,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const bodyClass = `w-full h-full ${inter.className}`
   return (
     <html lang="en" className="bg-celadon text-oxford-blue w-full h-full">
-      <body className={inter.className}>{children}</body>
+      <body className={bodyClass}>{children}</body>
     </html>
   );
 }

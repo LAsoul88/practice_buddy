@@ -36,6 +36,7 @@ export const Input = ({
             defaultValue={value}
             onChange={handleChange}
             className={style}
+            style={{width: `${width}`, height: `${height}`}}
           >
             { options.map(option => {
               return <option key={option}>{option}</option>
