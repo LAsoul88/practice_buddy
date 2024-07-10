@@ -7,7 +7,7 @@ export default async function Journal() {
 
 	const createEntry = async (body: any) => {
 		'use server'
-		await POST('/journal', body)
+		await POST('/entries', body)
 	}
 
 	return (
