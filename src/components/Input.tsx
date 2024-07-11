@@ -51,7 +51,8 @@ export const Input = ({
             value={value}
             onChange={handleChange}
             className={style}
-            ></textarea>
+          />
+            // find a way to correctly handle change of text area
         )
       default:
         return (
