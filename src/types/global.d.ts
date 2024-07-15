@@ -14,5 +14,8 @@ declare global {
     submit: (body: any) => void
   }
 
-  
+  interface JournalEntry {
+    text: string
+    _id?: string
+  }
 }

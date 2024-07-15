@@ -10,6 +10,7 @@ type InputProps = {
   width?: string
   height?: string
   options?: string[]
+  disabled: boolean
   handleChange: (e: ChangeEvent<FormElements>) => void
 }
 
@@ -23,6 +24,7 @@ export const Input = ({
   width = '72px',
   height = '34px',
   options = [],
+  disabled = false,
   handleChange
 }: InputProps) => {
   const style = `input w-[${width}] h-[${height}]`
@@ -37,6 +39,7 @@ export const Input = ({
             onChange={handleChange}
             className={style}
             style={{width: `${width}`, height: `${height}`}}
+            disabled={disabled}
           >
             { options.map(option => {
               return <option key={option}>{option}</option>
@@ -51,6 +54,7 @@ export const Input = ({
             value={value}
             onChange={handleChange}
             className={style}
+            disabled={disabled}
           />
             // find a way to correctly handle change of text area
         )
@@ -65,6 +69,7 @@ export const Input = ({
             value={value}
             onChange={handleChange}
             className={style}
+            disabled={disabled}
           />
         )
     }

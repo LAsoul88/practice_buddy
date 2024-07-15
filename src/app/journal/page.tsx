@@ -2,13 +2,19 @@ import { JournalForm } from './_components/JournalForm'
 import { GET, POST } from '@/lib/fetch'
 
 export default async function Journal() {
-	// const entries = await GET('/journal')
-	const entries = ['I practiced Giant Steps at 200bpm', 'Portrait of Tracy just getting comfortable with harmonics']
 
 	const createEntry = async (body: any) => {
 		'use server'
 		await POST('/entries', body)
 	}
+
+	const getEntries = async () => {
+    'use server'
+		console.log('this got called')
+    return await GET('/entries')
+  }
+
+	const entries: JournalEntry[] = await getEntries()
 
 	return (
 		<div className="w-full h-full flex">
@@ -18,11 +24,11 @@ export default async function Journal() {
 					submit={createEntry}
 				/>
 			</div>
-			<div className="flex flex-col w-1/2">
-				{entries.map((entry: string) => {
-					return <div key={entry}>{entry}</div>
+			<ul className="flex flex-col w-1/2">
+				{ entries.map(entry => {
+					return <li key={entry._id}>{entry.text}</li>
 				})}
-			</div>
+			</ul>
 		</div>
 	)
 }

@@ -1,19 +1,21 @@
 'use client'
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 
-interface JournalEntry {
-	text: string
-}
-
 export const JournalForm = ({ submit }: FormProps) => {
+	const router = useRouter()
+	const [isPending, startTransition] = useTransition()
 	const [entry, setEntry] = useState<JournalEntry>({ text: '' })
 
 	const handleSubmit = (e: OnSubmitEvent) => {
 		e.preventDefault()
 		submit(entry)
 		setEntry({ text: '' })
+		startTransition(() => {
+			router.refresh()
+		})
 	}
 
 	const handleChange = (e: OnChangeEvent) => {
@@ -30,6 +32,7 @@ export const JournalForm = ({ submit }: FormProps) => {
 				handleChange={handleChange}
 				width={'200px'}
 				height={'200px'}
+				disabled={isPending}
 			/>
 			<Button>Submit</Button>
 		</form>
