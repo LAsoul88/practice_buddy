@@ -26,11 +26,13 @@ export const LoginForm = ({ submit }: FormProps) => {
     setLoginInfo({ ...loginInfo, [field]: value })
   }
   return (
-    <form className="flex w-full h-full border rounded-md justify-center items-center bg-slateGray" onSubmit={handleSubmit}>
+    <form className="flex flex-col w-full h-full border rounded-md justify-center items-center bg-slateGray gap-16" onSubmit={handleSubmit}>
+      <h2 className="text-4xl">Login</h2>
       <div>
         <div className="flex flex-col text-center items-center p-2">
           <Input 
             type="email"
+            id={'email'}
             name={'Email'}
             value={loginInfo.email}
             handleChange={handleChange}
@@ -39,6 +41,7 @@ export const LoginForm = ({ submit }: FormProps) => {
         <div className="flex flex-col text-center items-center p-2">
           <Input 
             type="password"
+            id={'password'}
             name={'Password'}
             value={loginInfo.password}
             handleChange={handleChange}

@@ -27,7 +27,8 @@ export const JournalForm = ({ submit }: FormProps) => {
 		<form className="flex flex-col" onSubmit={handleSubmit}>
 			<Input
 				inputType="textarea"
-				name="Text"
+				id={'text'}
+				name={'Text'}
 				value={entry.text}
 				handleChange={handleChange}
 				width={'200px'}

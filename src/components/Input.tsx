@@ -3,6 +3,7 @@ import { ChangeEvent } from 'react'
 type InputProps = {
   inputType?: 'input' | 'select' | 'textarea'
   type?: string
+  id: string
   name: string
   min?: number
   max?: number
@@ -10,13 +11,14 @@ type InputProps = {
   width?: string
   height?: string
   options?: string[]
-  disabled: boolean
+  disabled?: boolean
   handleChange: (e: ChangeEvent<FormElements>) => void
 }
 
 export const Input = ({ 
   inputType = 'input',
   type = 'number',
+  id,
   name,
   min,
   max,
@@ -33,7 +35,7 @@ export const Input = ({
       case 'select':
         return (
           <select
-            id={name}
+            id={id}
             name={name}
             defaultValue={value}
             onChange={handleChange}
@@ -49,7 +51,7 @@ export const Input = ({
       case 'textarea':
         return (
           <textarea
-            id={name}
+            id={id}
             name={name}
             value={value}
             onChange={handleChange}
@@ -63,7 +65,7 @@ export const Input = ({
           <input 
             type={type}
             name={name}
-            id={name}
+            id={id}
             min={min}
             max={max}
             value={value}
