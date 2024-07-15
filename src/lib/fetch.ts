@@ -1,10 +1,14 @@
 import 'server-only'
 
-const baseURL = 'http://localhost:3001'
+const baseURL = process.env.NEXT_PUBLIC_API_URL
 
 export const GET = async (url: string) => {
   const result = await fetch(baseURL + url, {
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    cache: 'no-store'
   }).then(res => res.json())
   return result
 }
