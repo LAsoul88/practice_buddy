@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { DroneTool } from '@/app/_components/DroneTool'
 import { MetronomeTool } from '@/app/_components/MetronomeTool'
 
@@ -18,6 +19,7 @@ export default function Home() {
           <h2>Practice Journal</h2>
         </section> */}
       </div>
+      <Link href="/journal">Journal</Link>
     </main>
   )
 }
