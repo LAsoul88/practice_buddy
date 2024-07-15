@@ -1,6 +1,6 @@
 import 'server-only'
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL
+const baseURL = process.env.API_URL
 
 export const GET = async (url: string) => {
   const result = await fetch(baseURL + url, {
