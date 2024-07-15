@@ -10,7 +10,6 @@ export default async function Journal() {
 
 	const getEntries = async () => {
     'use server'
-		console.log('this got called')
     return await GET('/entries')
   }
 

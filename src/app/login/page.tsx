@@ -5,7 +5,7 @@ export default function Login() {
 
   const login = async (body: any) => {
     'use server'
-    await POST('/login', body)
+    await POST('/auth/login', body)
   }
 
 	return (
