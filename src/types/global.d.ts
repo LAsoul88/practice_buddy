@@ -18,4 +18,18 @@ declare global {
     text: string
     _id?: string
   }
+
+  interface RegistrationFormValues {
+    email: string
+    username: string
+    password: string
+    passwordConfirm: string
+  }
+
+  interface LoginInfo {
+    email: string
+    password: string
+  }
+
+  type FormRegisterValues = RegistrationInfo | LoginInfo
 }
