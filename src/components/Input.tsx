@@ -1,4 +1,3 @@
-'use client'
 import { ChangeEvent } from 'react'
 import { UseFormRegister, Path } from 'react-hook-form'
 
@@ -14,7 +13,6 @@ type InputProps = {
   height?: string
   options?: string[]
   disabled?: boolean
-  register?: UseFormRegister<FormRegisterValues>
   handleChange?: (e: ChangeEvent<FormElements>) => void
 }
 
@@ -30,7 +28,6 @@ export const Input = ({
   height = '34px',
   options = [],
   disabled = false,
-  register,
   handleChange
 }: InputProps) => {
   const style = `input w-[${width}] h-[${height}]`

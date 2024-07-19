@@ -1,7 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '@/components/Button'
-import { Input } from '@/components/Input'
+import { FormInput } from '@/components/Input'
 
 interface LoginInfo {
   email: string
@@ -9,42 +9,27 @@ interface LoginInfo {
 }
 
 export const LoginForm = ({ submit }: FormProps) => {
-  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
-    email: '',
-    password: ''
-  })
+  const { register, handleSubmit, watch, formState: { errors }} = useForm<LoginInfo>()
 
-  const handleSubmit = (e: OnSubmitEvent) => {
-    e.preventDefault()
-    submit(loginInfo)
-    setLoginInfo({ email: '', password: '' })
-  }
-
-  const handleChange = (e: OnChangeEvent) => {
-    const value: string = e.target.value
-    const field: string = e.target.id.toLowerCase()
-    setLoginInfo({ ...loginInfo, [field]: value })
-  }
+  const onSubmit: SubmitHandler<LoginInfo> = data => submit(data)
   return (
-    <form className="flex flex-col w-full h-full border rounded-md justify-center items-center bg-slateGray gap-16" onSubmit={handleSubmit}>
+    <form className="flex flex-col w-full h-full border rounded-md justify-center items-center bg-slateGray gap-16" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="text-4xl">Login</h2>
       <div>
         <div className="flex flex-col text-center items-center p-2">
-          <Input 
-            type="email"
-            id={'email'}
-            name={'Email'}
-            value={loginInfo.email}
-            handleChange={handleChange}
+          <FormInput 
+            name={'email'}
+            label={'Email'}
+            register={register}
+            required
           />
         </div>
         <div className="flex flex-col text-center items-center p-2">
-          <Input 
-            type="password"
-            id={'password'}
-            name={'Password'}
-            value={loginInfo.password}
-            handleChange={handleChange}
+          <FormInput 
+            name={'password'}
+            label={'Password'}
+            register={register}
+            required
           />
         </div>
         <div className="flex flex-col text-center items-center p-2">
