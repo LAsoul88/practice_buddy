@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '@/components/Button'
-import { Input } from '@/components/Input'
+import { FormInput } from '@/components/Input'
 
 interface RegistrationInfo {
 	email: string
@@ -11,72 +12,53 @@ interface RegistrationInfo {
 }
 
 export const RegistrationForm = ({ submit }: FormProps) => {
-	const [registrationInfo, setRegistrationInfo] = useState<RegistrationInfo>({
-		email: '',
-		username: '',
-		password: '',
-    passwordConfirm: ''
-	})
+	const { register, handleSubmit, watch, formState: { errors }} = useForm<RegistrationInfo>()
+	const onSubmit: SubmitHandler<RegistrationInfo> = data => submit(data)
 
-	const handleSubmit = (e: OnSubmitEvent) => {
-		e.preventDefault()
-		submit(registrationInfo)
-		setRegistrationInfo({ 
-      email: '', 
-      username: '', 
-      password: '', 
-      passwordConfirm: '' 
-    })
-	}
+	console.log(watch('email'))
 
-	const handleChange = (e: OnChangeEvent) => {
-		const value: string = e.target.value
-		const field: string = e.target.id
-		setRegistrationInfo({ ...registrationInfo, [field]: value })
-	}
-  console.log(registrationInfo)
 	return (
 		<form
 			className="flex flex-col w-full h-full border rounded-md justify-center items-center bg-slateGray gap-4"
-			onSubmit={handleSubmit}
+			onSubmit={handleSubmit(onSubmit)}
 		>
 			<h2 className="text-4xl">Registration</h2>
 			<div>
 				<div className="flex flex-col text-center items-center p-2">
-					<Input
-						type="email"
-						id={'email'}
-            name={'Email'}
-						value={registrationInfo.email}
-						handleChange={handleChange}
+					<FormInput 
+						name={'email'}
+						label={'Email'}
+						register={register}
+						required
 					/>
+					{errors.email && <span>This field is required.</span>}
 				</div>
 				<div className="flex flex-col text-center items-center p-2">
-					<Input
-						type="text"
-						id={'username'}
-            name={'Username'}
-						value={registrationInfo.username}
-						handleChange={handleChange}
+					<FormInput 
+						name={'username'}
+						label={'Username'}
+						register={register}
+						required
 					/>
+					{errors.username && <span>This field is required.</span>}
 				</div>
 				<div className="flex flex-col text-center items-center p-2">
-					<Input
-						type="password"
-						id={'password'}
-            name={'Password'}
-						value={registrationInfo.password}
-						handleChange={handleChange}
+					<FormInput 
+						name={'password'}
+						label={'Password'}
+						register={register}
+						required
 					/>
+					{errors.password && <span>This field is required.</span>}
 				</div>
-        <div className="flex flex-col text-center items-center p-2">
-					<Input
-						type="password"
-            id={'passwordConfirm'}
-						name={'Password Confirm'}
-						value={registrationInfo.passwordConfirm}
-						handleChange={handleChange}
+				<div className="flex flex-col text-center items-center p-2">
+					<FormInput 
+						name={'passwordConfirm'}
+						label={'Password Confirm'}
+						register={register}
+						required
 					/>
+					{errors.passwordConfirm && <span>This field is required.</span>}
 				</div>
 				<div className="flex flex-col text-center items-center p-2">
 					<Button>Submit</Button>
@@ -85,3 +67,4 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 		</form>
 	)
 }
+ 
