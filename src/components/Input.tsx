@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react'
-import { UseFormRegister, Path } from 'react-hook-form'
+import { UseFormRegister, Path, FieldErrors } from 'react-hook-form'
 
 type InputProps = {
   inputType?: 'input' | 'select' | 'textarea'
@@ -84,38 +84,64 @@ export const Input = ({
   )
 }
 interface FormInputProps {
-  name: Path<RegistrationFormValues>
+  name: Path<UserInfo>
   label: string
-  register: UseFormRegister<FormRegisterValues>
+  register: UseFormRegister<UserInfo>
   required?: boolean
+  errors: FieldErrors<UserInfo>
   width?: string
   height?: string
+}
+
+const valPattern: {
+  [name: string]: {
+    value: RegExp,
+    message: string
+  }
+} = {
+  'email': {
+    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+    message: 'This field must be an email.'
+  },
+  'password': {
+    value: /d/,
+    message: 'This password is too short.'
+  }
 }
 
 export const FormInput = ({ 
   name,
   label, 
   register, 
-  required,
+  errors,
   width = '72px', 
   height = '36px' 
 }: FormInputProps) => {
   const style = `input w-[${width}] h-[${height}]`
+  const error = errors[name]
+  const { value, message } = valPattern[name] ?? { value: '', message: ''}
   return (
     <>
       <label>{label}</label>
       <input 
-        {...register(name, { required })}
+        {...register(name, { 
+          required: 'This is required.',
+          pattern: {
+            value,
+            message
+          }
+        })}
         className={style}
       />
+      {error && <p>{error.message}</p>}
     </>
   )
 }
 
 interface FormSelectProps {
-  name: Path<RegistrationFormValues>
+  name: Path<UserInfo>
   label: string
-  register: UseFormRegister<FormRegisterValues>
+  register: UseFormRegister<UserInfo>
   options: string[]
   width: string
   height: string

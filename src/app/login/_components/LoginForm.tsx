@@ -11,6 +11,8 @@ interface LoginInfo {
 export const LoginForm = ({ submit }: FormProps) => {
   const { register, handleSubmit, watch, formState: { errors }} = useForm<LoginInfo>()
 
+
+  console.log(errors)
   const onSubmit: SubmitHandler<LoginInfo> = data => submit(data)
   return (
     <form className="flex flex-col w-full h-full border rounded-md justify-center items-center bg-slateGray gap-16" onSubmit={handleSubmit(onSubmit)}>
@@ -21,7 +23,7 @@ export const LoginForm = ({ submit }: FormProps) => {
             name={'email'}
             label={'Email'}
             register={register}
-            required
+            errors={errors}
           />
         </div>
         <div className="flex flex-col text-center items-center p-2">
@@ -29,7 +31,7 @@ export const LoginForm = ({ submit }: FormProps) => {
             name={'password'}
             label={'Password'}
             register={register}
-            required
+            errors={errors}
           />
         </div>
         <div className="flex flex-col text-center items-center p-2">

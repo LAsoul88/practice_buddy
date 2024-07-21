@@ -19,17 +19,11 @@ declare global {
     _id?: string
   }
 
-  interface RegistrationFormValues {
+  interface UserInfo {
     email: string
-    username: string
+    username?: string
     password: string
-    passwordConfirm: string
+    passwordConfirm?: string
   }
 
-  interface LoginInfo {
-    email: string
-    password: string
-  }
-
-  type FormRegisterValues = RegistrationInfo | LoginInfo
 }
