@@ -125,7 +125,7 @@ export const FormInput = ({
       <label>{label}</label>
       <input 
         {...register(name, { 
-          required: 'This is required.',
+          required: 'This field is required.',
           pattern: {
             value,
             message
