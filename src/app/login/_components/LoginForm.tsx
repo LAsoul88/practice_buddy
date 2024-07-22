@@ -31,7 +31,7 @@ export const LoginForm = ({ submit }: FormProps) => {
                 message: 'This field must be a valid email.'
               }
             })}
-            className={'input w-[200px] h-[36px]'}
+            className='input w-[200px] h-[36px]'
           />
           { errors.email && <span role="alert">{errors.email.message}</span> }
           {/* <FormInput 
@@ -54,7 +54,7 @@ export const LoginForm = ({ submit }: FormProps) => {
                 message: 'Password must be 4 or more characters.'
               }
             })}
-            className={'input w-[200px] h-[36px]'}
+            className='input w-[200px] h-[36px]'
           />
           { errors.password && <span role="alert">{errors.password.message}</span> }
 
