@@ -1,7 +1,7 @@
 'use client'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '@/components/Button'
-import { FormInput } from '@/components/Input'
+// import { FormInput } from '@/components/Input'
 
 interface LoginInfo {
   email: string
@@ -9,7 +9,7 @@ interface LoginInfo {
 }
 
 export const LoginForm = ({ submit }: FormProps) => {
-  const { register, handleSubmit, watch, formState: { errors }} = useForm<LoginInfo>()
+  const { register, handleSubmit, formState: { errors }} = useForm<LoginInfo>()
 
 
   console.log(errors)
@@ -19,20 +19,51 @@ export const LoginForm = ({ submit }: FormProps) => {
       <h2 className="text-4xl">Login</h2>
       <div>
         <div className="flex flex-col text-center items-center p-2">
-          <FormInput 
+          <label>Email</label>
+          <input 
+            {...register('email', {
+              required: {
+                value: true, 
+                message: 'This field is required to submit.'
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: 'This field must be a valid email.'
+              }
+            })}
+            className={'input w-[200px] h-[36px]'}
+          />
+          { errors.email && <span role="alert">{errors.email.message}</span> }
+          {/* <FormInput 
             name={'email'}
             label={'Email'}
             register={register}
             errors={errors}
-          />
+          /> */}
         </div>
         <div className="flex flex-col text-center items-center p-2">
-          <FormInput 
+          <label>Password</label>
+          <input 
+            {...register('password', {
+              required: {
+                value: true,
+                message: 'This field is required to submit.'
+              },
+              minLength: {
+                value: 4,
+                message: 'Password must be 4 or more characters.'
+              }
+            })}
+            className={'input w-[200px] h-[36px]'}
+          />
+          { errors.password && <span role="alert">{errors.password.message}</span> }
+
+          {/* <FormInput 
             name={'password'}
             label={'Password'}
             register={register}
             errors={errors}
-          />
+          /> */}
         </div>
         <div className="flex flex-col text-center items-center p-2">
           <Button>Submit</Button>
