@@ -1,7 +1,6 @@
 'use client'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '@/components/Button'
-import { FormInput } from '@/components/Input'
 
 interface RegistrationInfo {
 	email: string
@@ -15,10 +14,15 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 	
 	const onSubmit: SubmitHandler<RegistrationInfo> = data => submit(data)
 
+	const confirmPassMatch = () => {
+		return (watch('password') !== watch('passwordConfirm')) && (watch('password').length > 3)
+	}
+
 	return (
 		<form
 			className="flex flex-col w-full h-full border rounded-md justify-center items-center bg-slateGray gap-4"
 			onSubmit={handleSubmit(onSubmit)}
+			autoComplete="off"
 		>
 			<h2 className="text-4xl">Registration</h2>
 			<div>
@@ -37,12 +41,6 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 						})}
 						className='input w-[200px] h-[36px]'
 					/>
-					{/* <FormInput 
-						name={'email'}
-						label={'Email'}
-						register={register}
-						required
-					/> */}
 					{ errors.email && <span role="alert">{errors.email.message}</span> }
 				</div>
 				<div className="flex flex-col text-center items-center p-2">
@@ -56,12 +54,6 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 						})}
 						className='input w-[200px] h-[36px]'
 					/>
-					{/* <FormInput 
-						name={'username'}
-						label={'Username'}
-						register={register}
-						required
-					/> */}
 					{ errors.username && <span role="alert">{errors.username.message}</span> }
 				</div>
 				<div className="flex flex-col text-center items-center p-2">
@@ -79,12 +71,6 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 						})}
 						className='input w-[200px] h-[36px]'
 					/>
-					{/* <FormInput 
-						name={'password'}
-						label={'Password'}
-						register={register}
-						required
-					/> */}
 					{ errors.password && <span role="alert">{errors.password.message}</span> }
 				</div>
 				<div className="flex flex-col text-center items-center p-2">
@@ -98,13 +84,8 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 						})}
 						className='input w-[200px] h-[36px]'
 					/>
-					{/* <FormInput 
-						name={'passwordConfirm'}
-						label={'Password Confirm'}
-						register={register}
-						required
-					/> */}
-					{ (watch('password') !== watch('passwordConfirm') && <span role="alert">'Passwords do not match'</span>) || (errors.passwordConfirm && <span role="alert">{errors.passwordConfirm.message}</span>) }
+					{ confirmPassMatch() && <span role="alert">'Passwords do not match'</span> }
+					{ (errors.passwordConfirm && <span role="alert">{errors.passwordConfirm.message}</span>) }
 				</div>
 				<div className="flex flex-col text-center items-center p-2">
 					<Button>Submit</Button>
