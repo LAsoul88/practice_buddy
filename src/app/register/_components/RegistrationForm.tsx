@@ -15,7 +15,7 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 	const onSubmit: SubmitHandler<RegistrationInfo> = data => submit(data)
 
 	const confirmPassMatch = () => {
-		return (watch('password') !== watch('passwordConfirm')) && (watch('password').length > 3)
+		return (watch('password') !== watch('passwordConfirm')) && (watch('password').length > 3 && watch('passwordConfirm').length > 3)
 	}
 
 	return (
