@@ -1,10 +1,9 @@
 'use client'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '@/components/Button'
-// import { FormInput } from '@/components/Input'
 
 interface LoginInfo {
-  email: string
+  user: string
   password: string
 }
 
@@ -19,27 +18,17 @@ export const LoginForm = ({ submit }: FormProps) => {
       <h2 className="text-4xl">Login</h2>
       <div>
         <div className="flex flex-col text-center items-center p-2">
-          <label>Email</label>
+          <label>Email/Username</label>
           <input 
-            {...register('email', {
+            {...register('user', {
               required: {
                 value: true, 
                 message: 'This field is required to submit.'
               },
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: 'This field must be a valid email.'
-              }
             })}
             className='input w-[200px] h-[36px]'
           />
-          { errors.email && <span role="alert">{errors.email.message}</span> }
-          {/* <FormInput 
-            name={'email'}
-            label={'Email'}
-            register={register}
-            errors={errors}
-          /> */}
+          { errors.user && <span role="alert">{errors.user.message}</span> }
         </div>
         <div className="flex flex-col text-center items-center p-2">
           <label>Password</label>
@@ -57,13 +46,6 @@ export const LoginForm = ({ submit }: FormProps) => {
             className='input w-[200px] h-[36px]'
           />
           { errors.password && <span role="alert">{errors.password.message}</span> }
-
-          {/* <FormInput 
-            name={'password'}
-            label={'Password'}
-            register={register}
-            errors={errors}
-          /> */}
         </div>
         <div className="flex flex-col text-center items-center p-2">
           <Button>Submit</Button>
