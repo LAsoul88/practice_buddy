@@ -43,6 +43,7 @@ export const LoginForm = ({ submit }: FormProps) => {
                 message: 'Password must be 4 or more characters.'
               }
             })}
+            type="password"
             className='input w-[200px] h-[36px]'
           />
           { errors.password && <span role="alert">{errors.password.message}</span> }

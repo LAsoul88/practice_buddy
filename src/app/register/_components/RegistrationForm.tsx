@@ -69,6 +69,7 @@ export const RegistrationForm = ({ submit }: FormProps) => {
                 message: 'Password must be 4 or more characters.'
               }
 						})}
+						type="password"
 						className='input w-[200px] h-[36px]'
 					/>
 					{ errors.password && <span role="alert">{errors.password.message}</span> }
@@ -82,6 +83,7 @@ export const RegistrationForm = ({ submit }: FormProps) => {
                 message: 'This field is required to submit.'
               },
 						})}
+						type="password"
 						className='input w-[200px] h-[36px]'
 					/>
 					{ confirmPassMatch() && <span role="alert">'Passwords do not match'</span> }
