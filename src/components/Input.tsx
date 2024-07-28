@@ -1,5 +1,4 @@
 import { ChangeEvent } from 'react'
-import { UseFormRegister, Path, FieldErrors } from 'react-hook-form'
 
 type InputProps = {
   inputType?: 'input' | 'select' | 'textarea'

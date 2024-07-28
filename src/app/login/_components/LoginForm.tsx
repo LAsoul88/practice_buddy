@@ -10,13 +10,11 @@ interface LoginInfo {
 export const LoginForm = ({ submit }: FormProps) => {
   const { register, handleSubmit, formState: { errors }} = useForm<LoginInfo>()
 
-
-  console.log(errors)
   const onSubmit: SubmitHandler<LoginInfo> = data => submit(data)
   return (
-    <form className="flex flex-col w-full h-full border rounded-md justify-center items-center bg-slateGray gap-16" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col w-fit h-fit border rounded-md justify-center items-center bg-slateGray p-12 gap-8" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="text-4xl">Login</h2>
-      <div>
+      <div className="flex flex-col">
         <div className="flex flex-col text-center items-center p-2">
           <label>Email/Username</label>
           <input 
