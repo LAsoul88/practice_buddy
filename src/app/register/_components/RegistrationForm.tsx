@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Button } from '@/components/Button'
 
@@ -12,7 +13,12 @@ interface RegistrationInfo {
 export const RegistrationForm = ({ submit }: FormProps) => {
 	const { register, handleSubmit, watch, formState: { errors }} = useForm<RegistrationInfo>()
 	
-	const onSubmit: SubmitHandler<RegistrationInfo> = data => submit(data)
+	const [isActive, setIsActive] = useState<boolean>(false)
+	const onSubmit: SubmitHandler<RegistrationInfo> = data => { 
+		setIsActive(true)
+		if (confirmPassMatch() === true) return
+		submit(data)
+	}
 
 	const confirmPassMatch = () => {
 		return (watch('password') !== watch('passwordConfirm')) && (watch('password').length > 3 && watch('passwordConfirm').length > 3)
@@ -86,7 +92,7 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 						type="password"
 						className='input w-[200px] h-[36px]'
 					/>
-					{ confirmPassMatch() && <span role="alert">'Passwords do not match'</span> }
+					{ confirmPassMatch() && isActive && <span role="alert">'Passwords do not match'</span> }
 					{ (errors.passwordConfirm && <span role="alert">{errors.passwordConfirm.message}</span>) }
 				</div>
 				<div className="flex flex-col text-center items-center p-2">
