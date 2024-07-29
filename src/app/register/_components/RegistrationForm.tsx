@@ -20,12 +20,12 @@ export const RegistrationForm = ({ submit }: FormProps) => {
 
 	return (
 		<form
-			className="flex flex-col w-full h-full border rounded-md justify-center items-center bg-slateGray gap-4"
+			className="flex flex-col w-fit h-fit border rounded-md justify-center items-center bg-slateGray p-12 gap-4"
 			onSubmit={handleSubmit(onSubmit)}
 			autoComplete="off"
 		>
 			<h2 className="text-4xl">Registration</h2>
-			<div>
+			<div className="flex flex-col">
 				<div className="flex flex-col text-center items-center p-2">
 					<label>Email</label>
 					<input 
