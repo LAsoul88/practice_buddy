@@ -1,11 +1,17 @@
 import { LoginForm } from './_components/LoginForm'
+import { redirect } from 'next/navigation'
 import { POST } from '@/lib/fetch'
 
 export default function Login() {
 
   const login = async (body: any) => {
     'use server'
-    const res = await POST('/auth/login', body)
+    try {
+      const res = await POST('/auth/login', body)
+      redirect(res.redirect)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 	return (
