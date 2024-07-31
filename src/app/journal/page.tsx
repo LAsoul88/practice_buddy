@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { JournalForm } from './_components/JournalForm'
 import { GET, POST } from '@/lib/fetch'
 
@@ -23,11 +24,13 @@ export default async function Journal() {
 					submit={createEntry}
 				/>
 			</div>
-			<ul className="flex flex-col w-1/2">
-				{ entries.map(entry => {
-					return <li key={entry._id}>{entry.text}</li>
-				})}
-			</ul>
+			<Suspense fallback={<div>Loading...</div>}>
+				<ul className="flex flex-col w-1/2">
+					{ entries.map(entry => {
+						return <li key={entry._id}>{entry.text}</li>
+					})}
+				</ul>
+			</Suspense>
 		</div>
 	)
 }
