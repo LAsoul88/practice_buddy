@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { JournalForm } from './_components/JournalForm'
+import { JournalForm } from '../_components/JournalForm'
 import { GET, POST } from '@/lib/fetch'
 
 export default async function Journal() {
