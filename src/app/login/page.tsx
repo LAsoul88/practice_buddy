@@ -3,14 +3,16 @@ import { redirect } from 'next/navigation'
 import { POST } from '@/lib/fetch'
 
 export default function Login() {
-
   const login = async (body: any) => {
     'use server'
+    let redirectPath: string | null = null
     try {
       const res = await POST('/auth/login', body)
-      redirect(res.redirect)
+      redirectPath = res.redirect
     } catch (error) {
       console.log(error)
+    } finally {
+      if (redirectPath) redirect(redirectPath)
     }
   }
 
