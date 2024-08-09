@@ -7,7 +7,7 @@ type InputProps = {
   name: string
   min?: number
   max?: number
-  value: number | string
+  value?: number | string
   width?: string
   height?: string
   options?: string[]
@@ -53,8 +53,7 @@ export const Input = ({
           <textarea
             id={id}
             name={name}
-            value={value}
-            onChange={handleChange}
+            defaultValue={value || ''}
             className={style}
             disabled={disabled}
           />
@@ -77,7 +76,11 @@ export const Input = ({
   }
   return (
     <>
-      <label htmlFor={name}>{name}</label>
+      { type === 'hidden' 
+          ? 
+        '' 
+          : 
+        <label htmlFor={name}>{name}</label>}
       { createInput() }
     </>
   )
