@@ -16,7 +16,8 @@ declare global {
 
   interface JournalEntry {
     text: string
-    _id?: string
+    userId: string
+    _id: string
   }
 
   interface UserInfo {
@@ -26,4 +27,7 @@ declare global {
     passwordConfirm?: string
   }
 
+  interface Params {
+    params: { id: string }
+  }
 }
