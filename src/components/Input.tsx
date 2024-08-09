@@ -3,19 +3,22 @@ import { ChangeEvent } from 'react'
 type InputProps = {
   inputType?: 'input' | 'select' | 'textarea'
   type?: string
+  id: string
   name: string
   min?: number
   max?: number
-  value: number | string
+  value?: number | string
   width?: string
   height?: string
   options?: string[]
-  handleChange: (e: ChangeEvent<FormElements>) => void
+  disabled?: boolean
+  handleChange?: (e: ChangeEvent<FormElements>) => void
 }
 
 export const Input = ({ 
   inputType = 'input',
   type = 'number',
+  id,
   name,
   min,
   max,
@@ -23,6 +26,7 @@ export const Input = ({
   width = '72px',
   height = '34px',
   options = [],
+  disabled = false,
   handleChange
 }: InputProps) => {
   const style = `input w-[${width}] h-[${height}]`
@@ -31,12 +35,13 @@ export const Input = ({
       case 'select':
         return (
           <select
-            id={name}
+            id={id}
             name={name}
             defaultValue={value}
             onChange={handleChange}
             className={style}
             style={{width: `${width}`, height: `${height}`}}
+            disabled={disabled}
           >
             { options.map(option => {
               return <option key={option}>{option}</option>
@@ -46,31 +51,36 @@ export const Input = ({
       case 'textarea':
         return (
           <textarea
-            id={name}
+            id={id}
             name={name}
-            value={value}
-            onChange={handleChange}
+            defaultValue={value || ''}
             className={style}
-            ></textarea>
+            disabled={disabled}
+          />
         )
       default:
         return (
           <input 
             type={type}
             name={name}
-            id={name}
+            id={id}
             min={min}
             max={max}
             value={value}
             onChange={handleChange}
             className={style}
+            disabled={disabled}
           />
         )
     }
   }
   return (
     <>
-      <label htmlFor={name}>{name}</label>
+      { type === 'hidden' 
+          ? 
+        '' 
+          : 
+        <label htmlFor={name}>{name}</label>}
       { createInput() }
     </>
   )

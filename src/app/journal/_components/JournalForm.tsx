@@ -1,30 +1,22 @@
-'use client'
-import { useState } from 'react'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { addEntry } from '@/lib/actions'
 
-export const JournalForm = ({ submit }: FormProps) => {
-	const [entry, setEntry] = useState('')
-
-	const handleSubmit = (e: OnSubmitEvent) => {
-		e.preventDefault()
-		submit(entry)
-		setEntry('')
-	}
-
-	const handleChange = (e: OnChangeEvent) => {
-		const value: string = e.target.value
-		setEntry(value)
-	}
+export const JournalForm = ({ params }: Params) => {
 	return (
-		<form className="flex flex-col" onSubmit={handleSubmit}>
+		<form className="flex flex-col" action={addEntry}>
 			<Input
 				inputType="textarea"
-				name="Entry"
-				value={entry}
-				handleChange={handleChange}
+				id={'text'}
+				name={'Text'}
 				width={'200px'}
 				height={'200px'}
+			/>
+			<Input
+				id={'id'}
+				name={'Id'}
+				value={params.id}
+				type={'hidden'}
 			/>
 			<Button>Submit</Button>
 		</form>
