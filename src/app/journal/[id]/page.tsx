@@ -1,27 +1,17 @@
 import { Suspense } from 'react'
 import { JournalForm } from '../_components/JournalForm'
-import { GET, POST } from '@/lib/fetch'
+import { GET } from '@/lib/fetch'
 
-export default async function Journal() {
+export default async function Journal({ params }: Params) {
 
-	const createEntry = async (body: any) => {
-		'use server'
-		await POST('/entries', body)
-	}
-
-	const getEntries = async () => {
-    'use server'
-    return await GET('/entries')
-  }
-
-	const entries: JournalEntry[] = await getEntries()
+	const entries: JournalEntry[] = await GET(`/entries/${params.id}`)
 
 	return (
 		<div className="w-full h-full flex">
 			<div className="flex flex-col w-1/2 h-full items-center p-10 space-y-3">
 				<h2>Practice Journal</h2>
 				<JournalForm 
-					submit={createEntry}
+					params={params}
 				/>
 			</div>
 			<Suspense fallback={<div>Loading...</div>}>
