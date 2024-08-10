@@ -1,12 +1,12 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import { registerUser } from '@/lib/actions'
+import { register } from '@/lib/actions'
 
 export const RegistrationForm = () => {
 	return (
 		<form
 			className="flex flex-col w-fit h-fit border rounded-md justify-center items-center bg-slateGray p-12 gap-4"
-			action={registerUser}
+			action={register}
 			autoComplete="off"
 		>
 			<h2 className="text-4xl">Registration</h2>

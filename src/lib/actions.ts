@@ -8,7 +8,7 @@ const baseUrl = process.env.API_URL
 
 // }
 
-export const addEntry = async (formData: FormData) => {
+export async function addEntry(formData: FormData) {
   try {
     const result = await fetch(baseUrl + '/entries', {
       method: 'POST',
@@ -27,7 +27,7 @@ export const addEntry = async (formData: FormData) => {
   }
 }
 
-export const login = async (formData: FormData) => {
+export async function login(formData: FormData) {
   try {
     const result = await fetch(baseUrl + '/auth/login', {
       method: 'POST',
@@ -45,7 +45,7 @@ export const login = async (formData: FormData) => {
   }
 }
 
-export const register = async (formData: FormData) => {
+export async function register(formData: FormData) {
   try {
     const result = await fetch(baseUrl + '/auth/register', {
       method: 'POST',
