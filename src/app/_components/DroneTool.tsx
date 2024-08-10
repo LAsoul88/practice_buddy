@@ -73,7 +73,7 @@ export const DroneTool = () => {
 					<Input
 						inputType="select"
 						id={'frequency'}
-						name={'Frequency'}
+						label={'Frequency'}
 						value={settings.frequency}
 						handleChange={handleChange}
 						options={notes}
@@ -82,7 +82,7 @@ export const DroneTool = () => {
 				<div className="flex flex-col text-center items-center w-1/2 p-2">
 					<Input
 						id={'volume'}
-						name={'Volume'}
+						label={'Volume'}
 						min={0}
 						max={10}
 						value={settings.volume}
