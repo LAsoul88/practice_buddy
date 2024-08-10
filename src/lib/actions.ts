@@ -8,7 +8,7 @@ const baseUrl = process.env.API_URL
 
 // }
 
-export const addEntry = async (formData: FormData) => {
+export async function addEntry(formData: FormData) {
   try {
     const result = await fetch(baseUrl + '/entries', {
       method: 'POST',
@@ -22,6 +22,43 @@ export const addEntry = async (formData: FormData) => {
     }).then(res => res.json())
 
     revalidatePath(`/journal/${result.userId}`)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function login(formData: FormData) {
+  try {
+    const result = await fetch(baseUrl + '/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        user: formData.get('emailUsername'),
+        password: formData.get('password')
+      })
+    }).then(res => res.json)
+    console.log('this', result)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function register(formData: FormData) {
+  try {
+    const result = await fetch(baseUrl + '/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: formData.get('email'),
+        username: formData.get('username'),
+        password: formData.get('password')
+      })
+    })
+    console.log('that', result)
   } catch (error) {
     console.log(error)
   }

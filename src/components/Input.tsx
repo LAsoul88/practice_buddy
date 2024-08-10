@@ -4,7 +4,7 @@ type InputProps = {
   inputType?: 'input' | 'select' | 'textarea'
   type?: string
   id: string
-  name: string
+  name?: string
   min?: number
   max?: number
   value?: number | string
@@ -12,6 +12,7 @@ type InputProps = {
   height?: string
   options?: string[]
   disabled?: boolean
+  label: string
   handleChange?: (e: ChangeEvent<FormElements>) => void
 }
 
@@ -27,6 +28,7 @@ export const Input = ({
   height = '34px',
   options = [],
   disabled = false,
+  label,
   handleChange
 }: InputProps) => {
   const style = `input w-[${width}] h-[${height}]`
@@ -36,7 +38,7 @@ export const Input = ({
         return (
           <select
             id={id}
-            name={name}
+            name={name ? name : id}
             defaultValue={value}
             onChange={handleChange}
             className={style}
@@ -52,7 +54,7 @@ export const Input = ({
         return (
           <textarea
             id={id}
-            name={name}
+            name={name ? name : id}
             defaultValue={value || ''}
             className={style}
             disabled={disabled}
@@ -62,7 +64,7 @@ export const Input = ({
         return (
           <input 
             type={type}
-            name={name}
+            name={name ? name : id}
             id={id}
             min={min}
             max={max}
@@ -80,7 +82,7 @@ export const Input = ({
           ? 
         '' 
           : 
-        <label htmlFor={name}>{name}</label>}
+        <label htmlFor={name}>{label}</label>}
       { createInput() }
     </>
   )
