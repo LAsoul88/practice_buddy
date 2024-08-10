@@ -26,3 +26,21 @@ export const addEntry = async (formData: FormData) => {
     console.log(error)
   }
 }
+
+export const login = async (formData: FormData) => {
+  try {
+    const result = await fetch(baseUrl + '/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        user: formData.get('Email/Username'),
+        password: formData.get('Password')
+      })
+    }).then(res => res.json)
+    console.log(result, 'this')
+  } catch (error) {
+    console.log(error)
+  }
+}
