@@ -10,7 +10,8 @@ export const LoginForm = () => {
         <div className="flex flex-col text-center items-center p-2">
           <Input
             id={'user'}
-            name={'Email/Username'}
+            name={'emailUsername'}
+            label={'Email/Username'}
             type={'text'}
             width={'200px'}
             height={'36px'}
@@ -19,7 +20,8 @@ export const LoginForm = () => {
         <div className="flex flex-col text-center items-center p-2">
         <Input
             id={'password'}
-            name={'Password'}
+            name={'password'}
+            label={'Password'}
             type={'password'}
             width={'200px'}
             height={'36px'}

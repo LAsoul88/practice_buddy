@@ -35,11 +35,30 @@ export const login = async (formData: FormData) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ 
-        user: formData.get('Email/Username'),
-        password: formData.get('Password')
+        user: formData.get('emailUsername'),
+        password: formData.get('password')
       })
     }).then(res => res.json)
-    console.log(result, 'this')
+    console.log('this', result)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const register = async (formData: FormData) => {
+  try {
+    const result = await fetch(baseUrl + '/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: formData.get('email'),
+        username: formData.get('username'),
+        password: formData.get('password')
+      })
+    })
+    console.log('that', result)
   } catch (error) {
     console.log(error)
   }
