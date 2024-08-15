@@ -16,11 +16,8 @@ export default function Home() {
           <h2>Metronome</h2>
           <MetronomeTool />
         </section>
-        {/* <section className="flex flex-col items-center w-1/3 min-h-[260px]" role="region" aria-label="Practice Journal">
-          <h2>Practice Journal</h2>
-        </section> */}
       </div>
-      <Link href="/journal">Journal</Link>
+      <Link href={'/journal/66a04214f379ab6c7ea7246f'}>Journal</Link>
     </main>
   )
 }
