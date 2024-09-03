@@ -20,7 +20,9 @@ export default function RootLayout({
 		<html lang="en" className="bg-celadon text-oxford-blue w-full h-full overscroll-none">
 			<body className={bodyClass}>
         <Header />
-        {children}
+				<div className="mt-4">
+        	{children}
+				</div>
       </body>
 		</html>
 	)
