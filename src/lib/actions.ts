@@ -1,6 +1,7 @@
 'use server'
-// import { cookies } from 'next/headers'
+import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 const baseUrl = process.env.API_URL
 
@@ -28,6 +29,7 @@ export async function addEntry(formData: FormData) {
 }
 
 export async function login(formData: FormData) {
+  let data
   try {
     const result = await fetch(baseUrl + '/auth/login', {
       method: 'POST',
@@ -38,11 +40,12 @@ export async function login(formData: FormData) {
         user: formData.get('emailUsername'),
         password: formData.get('password')
       })
-    }).then(res => res.json)
-    console.log('this', result)
+    })
+    data = await result.json() 
   } catch (error) {
     console.log(error)
   }
+  redirect(`/journal/${data.user._id}`)
 }
 
 export async function register(formData: FormData) {
