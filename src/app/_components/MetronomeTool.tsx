@@ -58,7 +58,8 @@ export const MetronomeTool = () => {
 			<div className="flex p-2 space-between w-full">
 				<div className="flex flex-col text-center items-center w-1/2 p-2">
 					<Input 
-						name={'Tempo'}
+						id={'tempo'}
+						label={'Tempo'}
 						value={settings.tempo}
 						handleChange={handleChange}
 						min={24}
@@ -67,7 +68,8 @@ export const MetronomeTool = () => {
 				</div>
 				<div className="flex flex-col text-center items-center w-1/2 p-2">
 					<Input 
-						name="Beats"
+						id={'beats'}
+						label={'Beats'}
 						value={settings.beats}
 						handleChange={handleChange}
 						min={2}

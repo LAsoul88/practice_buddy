@@ -14,5 +14,20 @@ declare global {
     submit: (body: any) => void
   }
 
-  
+  interface JournalEntry {
+    text: string
+    userId: string
+    _id: string
+  }
+
+  interface UserInfo {
+    email: string
+    username?: string
+    password: string
+    passwordConfirm?: string
+  }
+
+  interface Params {
+    params: { id: string }
+  }
 }

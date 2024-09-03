@@ -1,47 +1,30 @@
-'use client'
-import { useState } from 'react'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { login } from '@/lib/actions'
 
-interface LoginInfo {
-  email: string
-  password: string
-}
-
-export const LoginForm = ({ submit }: FormProps) => {
-  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
-    email: '',
-    password: ''
-  })
-
-  const handleSubmit = (e: OnSubmitEvent) => {
-    e.preventDefault()
-    submit(loginInfo)
-    setLoginInfo({ email: '', password: '' })
-  }
-
-  const handleChange = (e: OnChangeEvent) => {
-    const value: string = e.target.value
-    const field: string = e.target.id.toLowerCase()
-    setLoginInfo({ ...loginInfo, [field]: value })
-  }
+export const LoginForm = () => {
   return (
-    <form className="flex w-full h-full border rounded-md justify-center items-center bg-slateGray" onSubmit={handleSubmit}>
-      <div>
+    <form className="flex flex-col w-fit h-fit border rounded-md justify-center items-center bg-slateGray p-12 gap-8" action={login}>
+      <h2 className="text-4xl">Login</h2>
+      <div className="flex flex-col">
         <div className="flex flex-col text-center items-center p-2">
-          <Input 
-            type="email"
-            name={'Email'}
-            value={loginInfo.email}
-            handleChange={handleChange}
+          <Input
+            id={'user'}
+            name={'emailUsername'}
+            label={'Email/Username'}
+            type={'text'}
+            width={'200px'}
+            height={'36px'}
           />
         </div>
         <div className="flex flex-col text-center items-center p-2">
-          <Input 
-            type="password"
-            name={'Password'}
-            value={loginInfo.password}
-            handleChange={handleChange}
+        <Input
+            id={'password'}
+            name={'password'}
+            label={'Password'}
+            type={'password'}
+            width={'200px'}
+            height={'36px'}
           />
         </div>
         <div className="flex flex-col text-center items-center p-2">

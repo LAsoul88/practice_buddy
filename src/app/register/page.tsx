@@ -1,11 +1,11 @@
-import { LoginForm } from './_components/LoginForm'
+import { RegistrationForm } from './_components/RegistrationForm'
 
-export default function Login() {
+export default function Register() {
 
 	return (
 		<div className="w-full h-full flex justify-center">
       <div className="flex justify-center items-center">
-        <LoginForm />
+        <RegistrationForm />
       </div>
 		</div>
 	)
