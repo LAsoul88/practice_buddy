@@ -42,6 +42,7 @@ export async function login(formData: FormData) {
       })
     })
     data = await result.json() 
+    if (data.error) return console.log(data.error)
   } catch (error) {
     console.log(error)
   }
