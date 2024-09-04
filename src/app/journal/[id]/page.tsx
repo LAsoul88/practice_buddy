@@ -4,7 +4,7 @@ import { GET } from '@/lib/fetch'
 
 export default async function Journal({ params }: Params) {
 
-	const entries: JournalEntry[] = await GET(`/entries/${params.id}`)
+	const entries: JournalEntry[] | string = await GET(`/entries/${params.id}`)
 
 	return (
 		<div className="w-full h-full flex">
@@ -15,11 +15,14 @@ export default async function Journal({ params }: Params) {
 				/>
 			</div>
 			<Suspense fallback={<div>Loading...</div>}>
-				<ul className="flex flex-col w-1/2">
-					{ entries.map(entry => {
-						return <li key={entry._id}>{entry.text}</li>
-					})}
-				</ul>
+				{ typeof entries !== 'string' ?
+					(<ul className="flex flex-col w-1/2">
+						{ entries.map(entry => {
+							return <li key={entry._id}>{entry.text}</li>
+						})}
+					</ul>)
+					: <p>{entries}</p>
+				}
 			</Suspense>
 		</div>
 	)

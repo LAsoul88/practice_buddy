@@ -10,6 +10,8 @@ export const GET = async (url: string) => {
         'Content-Type': 'application/json'
       }
     }).then(res => res.json())
+    
+    if (result.error) return result.error
     return result
   } catch (error) {
     console.log(error)
