@@ -19,7 +19,8 @@ export async function addEntry(formData: FormData) {
       body: JSON.stringify({ 
         text: formData.get('Text'),
         userId: formData.get('Id') 
-      })
+      }),
+      credentials: 'include'
     }).then(res => res.json())
 
     revalidatePath(`/journal/${result.userId}`)
@@ -29,24 +30,26 @@ export async function addEntry(formData: FormData) {
 }
 
 export async function login(formData: FormData) {
-  let data
-  try {
-    const result = await fetch(baseUrl + '/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ 
-        user: formData.get('emailUsername'),
-        password: formData.get('password')
-      })
-    })
-    data = await result.json() 
-    if (data.error) return console.log(data.error)
-  } catch (error) {
-    console.log(error)
-  }
-  redirect(`/journal/${data.user._id}`)
+  const response = await fetch(baseUrl + '/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ 
+      user: formData.get('emailUsername'),
+      password: formData.get('password')
+    }),
+    credentials: 'include'
+  })
+
+  const setCookie = response.headers.getSetCookie()
+  const authCookie = setCookie.find(cookie => cookie.includes('accessToken'))?.split('=')[1]
+  if (authCookie) cookies().set('accessToken', authCookie)
+  
+  const data = await response.json() 
+  if (data.error) return console.log(data.error)
+  return data
+  // redirect(`/journal/${data.user._id}`)
 }
 
 export async function register(formData: FormData) {
@@ -60,7 +63,8 @@ export async function register(formData: FormData) {
         email: formData.get('email'),
         username: formData.get('username'),
         password: formData.get('password')
-      })
+      }),
+      credentials: 'include'
     })
     console.log('that', result)
   } catch (error) {
