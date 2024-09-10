@@ -43,13 +43,34 @@ export async function login(formData: FormData) {
   })
 
   const setCookie = response.headers.getSetCookie()
-  const authCookie = setCookie.find(cookie => cookie.includes('accessToken'))?.split('=')[1]
-  if (authCookie) cookies().set('accessToken', authCookie)
+  const accessToken = setCookie.find(cookie => cookie.includes('accessToken'))?.split('=')[1]
+  const refreshToken = setCookie.find(cookie => cookie.includes('refreshToken'))?.split('=')[1]
+  const userSession = setCookie.find(cookie => cookie.includes('userSession'))?.split('=')[1]
+  console.log(accessToken)
+  
+  if (accessToken) cookies().set('accessToken', accessToken, {
+    httpOnly: true, 
+    secure: true, 
+    sameSite: 'none', 
+    maxAge: 1000 * 60 * 60
+  })
+  if (refreshToken) cookies().set('refreshToken', refreshToken, {
+    httpOnly: true, 
+    secure: true, 
+    sameSite: 'none', 
+    maxAge: 1000 * 60 * 60
+  })
+  if (userSession) cookies().set('userSession', userSession, {
+    httpOnly: true, 
+    secure: true, 
+    sameSite: 'none', 
+    maxAge: 1000 * 60 * 60
+  })
   
   const data = await response.json() 
   if (data.error) return console.log(data.error)
-  return data
-  // redirect(`/journal/${data.user._id}`)
+  // return data
+  redirect(`/`)
 }
 
 export async function register(formData: FormData) {
