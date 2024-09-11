@@ -5,9 +5,19 @@ import { redirect } from 'next/navigation'
 
 const baseUrl = process.env.API_URL
 
-// const setCookies = () => {
-
-// }
+const cookieOptions: {
+  httpOnly: boolean
+  secure: boolean
+  sameSite?: 'none' | 'lax' | 'strict' | boolean
+  maxAge: number
+  path: string
+} = {
+  httpOnly: true, 
+  secure: process.env.NODE_ENV === 'production', 
+  // sameSite: process.env.NODE_ENV === 'production' ? 'none': 'lax', 
+  maxAge: 1000 * 60 * 60,
+  path: '/'
+}
 
 export async function addEntry(formData: FormData) {
   try {
@@ -48,24 +58,9 @@ export async function login(formData: FormData) {
   const userSession = setCookie.find(cookie => cookie.includes('userSession'))?.split('=')[1]
   console.log(accessToken)
   
-  if (accessToken) cookies().set('accessToken', accessToken, {
-    httpOnly: true, 
-    secure: true, 
-    sameSite: 'none', 
-    maxAge: 1000 * 60 * 60
-  })
-  if (refreshToken) cookies().set('refreshToken', refreshToken, {
-    httpOnly: true, 
-    secure: true, 
-    sameSite: 'none', 
-    maxAge: 1000 * 60 * 60
-  })
-  if (userSession) cookies().set('userSession', userSession, {
-    httpOnly: true, 
-    secure: true, 
-    sameSite: 'none', 
-    maxAge: 1000 * 60 * 60
-  })
+  if (accessToken) cookies().set('accessToken', accessToken, cookieOptions)
+  if (refreshToken) cookies().set('refreshToken', refreshToken, cookieOptions)
+  if (userSession) cookies().set('userSession', userSession, cookieOptions)
   
   const data = await response.json() 
   if (data.error) return console.log(data.error)
