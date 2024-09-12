@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { JournalForm } from '../_components/JournalForm'
+import { JournalForm } from '@/app/journal/_components/JournalForm'
 import { getEntries } from '@/lib/actions'
 
 export default async function Journal({ params }: Params) {
