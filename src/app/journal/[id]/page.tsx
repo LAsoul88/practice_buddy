@@ -1,10 +1,10 @@
 import { Suspense } from 'react'
 import { JournalForm } from '../_components/JournalForm'
-import { GET } from '@/lib/fetch'
+import { getEntries } from '@/lib/actions'
 
 export default async function Journal({ params }: Params) {
 
-	const entries: JournalEntry[] | string = await GET(`/entries/${params.id}`)
+	const entries: JournalEntry[] | string = await getEntries(`/entries/${params.id}`)
 
 	return (
 		<div className="w-full h-full flex">
