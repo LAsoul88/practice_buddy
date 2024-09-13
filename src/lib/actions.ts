@@ -1,33 +1,9 @@
 'use server'
-import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { getCookie, setCookie, sessionOptions } from '@/lib/cookies'
 
 const baseUrl = process.env.API_URL
-
-const cookieOptions: {
-  httpOnly: boolean
-  secure: boolean
-  sameSite?: 'none' | 'lax' | 'strict' | boolean
-  maxAge: number
-  path: string
-  domain: string
-} = {
-  httpOnly: true, 
-  secure: process.env.NODE_ENV === 'production', 
-  sameSite: process.env.NODE_ENV === 'production' ? 'none': 'lax', 
-  maxAge: 1000 * 60 * 60,
-  path: '/',
-  domain: 'localhost'
-}
-
-const getCookie = (name: string) => {
-  return cookies().get(name)?.value ?? ''
-}
-
-const setCookie = async (name: string, token: string) => {
-  cookies().set(name, token, cookieOptions)
-}
 
 export async function addEntry(formData: FormData) {
   const res = await fetch(baseUrl + '/entries', {
@@ -62,8 +38,9 @@ export async function login(formData: FormData) {
 
   const data = await res.json() 
   if (data.error) return console.log(data.error)
+
   const { user, accessToken, refreshToken } = data
-  
+  if (user) setCookie('userSession', user, sessionOptions)
   if (accessToken) setCookie('accessToken', accessToken)
   if (refreshToken) setCookie('refreshToken', refreshToken)
   
@@ -88,6 +65,7 @@ export async function register(formData: FormData) {
   if (data.error) return console.log(data.error)
   
   const { user, accessToken, refreshToken } = data
+  if (user) setCookie('userSession', user, sessionOptions)
   if (accessToken) setCookie('accessToken', accessToken)
   if (refreshToken) setCookie('refreshToken', refreshToken)
 
