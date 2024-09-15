@@ -40,7 +40,8 @@ export async function login(formData: FormData) {
   if (data.error) return console.log(data.error)
 
   const { user, accessToken, refreshToken } = data
-  if (user) setCookie('userSession', user, sessionOptions)
+  
+  if (user) setCookie('userSession', JSON.stringify(user), sessionOptions)
   if (accessToken) setCookie('accessToken', accessToken)
   if (refreshToken) setCookie('refreshToken', refreshToken)
   
