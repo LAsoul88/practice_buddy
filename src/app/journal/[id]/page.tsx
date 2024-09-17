@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { JournalForm } from '@/app/journal/_components/JournalForm'
+import { Entry } from '@/app/journal/_components/Entry'
 import { getEntries } from '@/lib/actions'
 
 export default async function Journal({ params }: Params) {
@@ -16,9 +17,9 @@ export default async function Journal({ params }: Params) {
 			</div>
 			<Suspense fallback={<div>Loading...</div>}>
 				{ typeof entries !== 'string' ?
-					(<ul className="flex flex-col w-1/2">
+					(<ul className="flex flex-col w-1/2 gap-4">
 						{ entries.map(entry => {
-							return <li key={entry._id}>{entry.text}</li>
+							return <Entry {...entry} key={entry._id} />
 						})}
 					</ul>)
 					: <p>{entries}</p>
