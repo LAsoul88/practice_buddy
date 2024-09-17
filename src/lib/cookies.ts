@@ -38,3 +38,11 @@ export const setCookie = (
 ) => {
   cookies().set(name, token, options)
 }
+
+export const deleteCookie = (name: string) => {
+  cookies().delete(name)
+}
+
+export const clearCookies = () => {
+  cookies().getAll().forEach(cookie => cookies().delete(cookie.name))
+}
