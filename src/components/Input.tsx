@@ -82,7 +82,7 @@ export const Input = ({
           ? 
         '' 
           : 
-        <label htmlFor={name}>{label}</label>}
+        <label htmlFor={id}>{label}</label>}
       { createInput() }
     </>
   )

@@ -1,10 +1,11 @@
 import { Suspense } from 'react'
-import { JournalForm } from '../_components/JournalForm'
-import { GET } from '@/lib/fetch'
+import { JournalForm } from '@/app/journal/_components/JournalForm'
+import { Entry } from '@/app/journal/_components/Entry'
+import { getEntries } from '@/lib/actions'
 
 export default async function Journal({ params }: Params) {
 
-	const entries: JournalEntry[] = await GET(`/entries/${params.id}`)
+	const entries: JournalEntry[] | string = await getEntries(`/entries/${params.id}`)
 
 	return (
 		<div className="w-full h-full flex">
@@ -15,11 +16,14 @@ export default async function Journal({ params }: Params) {
 				/>
 			</div>
 			<Suspense fallback={<div>Loading...</div>}>
-				<ul className="flex flex-col w-1/2">
-					{ entries.map(entry => {
-						return <li key={entry._id}>{entry.text}</li>
-					})}
-				</ul>
+				{ typeof entries !== 'string' ?
+					(<ul className="flex flex-col w-1/2 gap-4">
+						{ entries.map(entry => {
+							return <Entry {...entry} key={entry._id} />
+						})}
+					</ul>)
+					: <p>{entries}</p>
+				}
 			</Suspense>
 		</div>
 	)
