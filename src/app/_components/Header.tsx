@@ -1,8 +1,10 @@
 import Link from 'next/link'
-import { cookies } from 'next/headers'
+import { CustomLink } from '@/app/_components/CustomLink'
+import { getCookie } from '@/lib/cookies'
+import { logout } from '@/lib/actions'
 
 export const Header = async () => {
-  const userCookie = cookies().get('userSession')?.value
+  const userCookie = getCookie('userSession')
   let username = ''
   let _id = ''
   if (userCookie) {
@@ -17,7 +19,7 @@ export const Header = async () => {
               ? 
             <>
               <li><Link href={`/journal/${_id}`}>{username}</Link></li> 
-              <li><Link href="">Logout</Link></li> 
+              <li><CustomLink href="/" onClick={logout}>Logout</CustomLink></li> 
             </>  
               : 
             <>
