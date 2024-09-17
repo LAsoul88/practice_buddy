@@ -59,8 +59,6 @@ export async function login(formData: FormData) {
        
 export const logout = async () => {
   clearCookies()
-
-  redirect('/')
 }
 
 // entries  
