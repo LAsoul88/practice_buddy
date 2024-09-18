@@ -8,12 +8,14 @@ export const JournalForm = ({ params }: Params) => {
 			<Input
 				inputType="textarea"
 				id={'text'}
+				name={'text'}
 				label={'Text'}
 				width={'200px'}
 				height={'200px'}
 			/>
 			<Input
 				id={'id'}
+				name={'id'}
 				label={'Id'}
 				value={params.id}
 				type={'hidden'}
