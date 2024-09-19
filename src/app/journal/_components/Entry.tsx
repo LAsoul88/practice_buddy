@@ -1,4 +1,4 @@
-import formatDate from '@/lib/day'
+import formatDate from '@/lib/dates'
 
 type EntryProps = {
   text: string
