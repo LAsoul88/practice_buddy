@@ -28,7 +28,7 @@ export const sessionOptions: CookieOptions = {
 }
 
 export const getCookie = (name: string) => {
-  return cookies().get(name)?.value
+  return cookies().get(name)?.value ?? ''
 }
 
 export const setCookie = (

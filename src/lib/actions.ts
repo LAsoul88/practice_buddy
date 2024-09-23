@@ -83,14 +83,18 @@ export const getEntries = async (url: string) => {
 }
 
 export async function addEntry(formData: FormData) {
+  const accessToken = 'accessToken=' + getCookie('accessToken')
+  const refreshToken = 'refreshToken=' + getCookie('refreshToken')
+  if (!accessToken && !refreshToken) return 'No valid token present'
   const res = await fetch(baseUrl + '/entries', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Cookie: accessToken ? accessToken + ';' + refreshToken : refreshToken
     },
     body: JSON.stringify({ 
-      text: formData.get('Text'),
-      userId: formData.get('Id') 
+      text: formData.get('text'),
+      userId: formData.get('id') 
     }),
     credentials: 'include'
   })

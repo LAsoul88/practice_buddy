@@ -27,8 +27,6 @@ export const Header = async () => {
               <li><Link href="/login">Login</Link></li>
             </>
           }
-            
-
         </ul>
       </nav>
     </header>
