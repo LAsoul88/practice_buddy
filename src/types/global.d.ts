@@ -17,6 +17,7 @@ declare global {
   interface JournalEntry {
     text: string
     userId: string
+    date: Date
     _id: string
   }
 
