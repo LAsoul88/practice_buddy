@@ -12,7 +12,7 @@ export const Header = async () => {
     _id = JSON.parse(userCookie)._id
   }
   return (
-    <header className="sticky top-0 z-50 w-full h-[48px] bg-oxfordBlue text-platinum">
+    <header className="sticky top-0 z-50 w-full h-[48px] bg-oxfordBlue text-platinum-200">
       <nav className="w-full h-full flex">
         <ul className="w-full h-full flex justify-end items-center gap-4 p-4">
           { userCookie 

@@ -13,6 +13,6 @@
 
 @layer components {
   .input {
-    @apply border border-oxfordBlue rounded-md text-oxfordBlue bg-platinum px-2 py-1
+    @apply border border-oxfordBlue rounded-md text-oxfordBlue bg-platinum-200 px-2 py-1
   }
 }

@@ -10,7 +10,10 @@ const config: Config = {
     extend: {
       colors: {
         celadon: '#94C595',
-        platinum: '#DDDDE3',
+        platinum: {
+          100:'#DDDDD3',
+          200: '#DDDDE3'
+        },
         slateGray: '#767F93',
         oxfordBlue: '#0B183E'
       },

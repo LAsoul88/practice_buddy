@@ -9,9 +9,9 @@ type EntryProps = {
 export const Entry = ({ text, date }: EntryProps) => {
   return (
     <li className="max-w-[300px]">
-      <div className="w-full border border-oxfordBlue rounded-md shadow-xl flex flex-col p-4 gap-4">
-        <span className="">{text}</span>
-        <span className="">{formatDate(date)}</span>
+      <div className="w-full border border-oxfordBlue rounded-md shadow-2xl flex flex-col p-4 gap-4 bg-platinum-100">
+        <span className="text-xl">{text}</span>
+        <span className="text-sm italic">{formatDate(date)}</span>
       </div>
     </li>
   )
