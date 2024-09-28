@@ -11,7 +11,7 @@ const config: Config = {
       colors: {
         celadon: '#94C595',
         platinum: {
-          100:'#DDDDD3',
+          100: '#DDDDD3',
           200: '#DDDDE3'
         },
         slateGray: '#767F93',
